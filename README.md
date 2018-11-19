@@ -124,3 +124,14 @@ rxpermission
             System.out.println(msg);
         }
     });
+
+
+支持重新设置okhttpclient
+
+
+     RetrofitManager.getInstance().setBaseUrl("http://192.168.2.154:3001")
+                    .setOkHttpClient(OkHttpManager.getInstance().build());
+
+或者直接build也可以用默认的client
+
+     RetrofitManager.getInstance().setBaseUrl("http://192.168.2.154:3001").build();
