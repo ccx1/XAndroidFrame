@@ -39,7 +39,7 @@ public class CameraHelper {
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri uri;
         if (Build.VERSION.SDK_INT >= 23) {
-            uri = FileProvider.getUriForFile(activity, activity.getPackageName(), file);
+            uri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".fileProvider", file);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         } else {
             uri = Uri.fromFile(file);
