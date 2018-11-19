@@ -64,7 +64,7 @@ public class XjSupportFragmentImp extends Fragment implements XjSupportFragment 
 
     @Override
     public void onResume() {
-        System.out.println("onResume "+ getClass().getName());
+        System.out.println("onResume " + getClass().getName());
         super.onResume();
     }
 
@@ -77,7 +77,11 @@ public class XjSupportFragmentImp extends Fragment implements XjSupportFragment 
     }
 
     public void popTo(Class<?> clazz) {
-        mXJFragmentDelegateHelper.popTo(clazz);
+        popTo(clazz, false);
+    }
+
+    public void popTo(Class<?> clazz, boolean includeTargetFragment) {
+        mXJFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
     }
 
     public void start(XjSupportFragmentImp fragment) {
