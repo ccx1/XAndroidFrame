@@ -135,3 +135,9 @@ rxpermission
 或者直接build也可以用默认的client
 
      RetrofitManager.getInstance().setBaseUrl("http://192.168.2.154:3001").build();
+
+
+### 参考
+
+    [fragmention](https://github.com/YoKeyword/Fragmentation)
+    [rxpermission](https://github.com/tbruyelle/RxPermissions)
