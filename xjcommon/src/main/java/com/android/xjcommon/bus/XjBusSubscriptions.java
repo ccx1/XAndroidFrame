@@ -42,7 +42,6 @@ public class XjBusSubscriptions {
                 }
             }
         });
-
     }
 
     public static void bind(Object o, Disposable... disposable) {

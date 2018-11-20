@@ -5,9 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.android.xjcommon.base.XjSupportActivityImp;
 import com.android.xjcommon.common.Common;
-import com.android.xjhttp.callback.ResponseCallback;
-import com.android.xjhttp.model.ResultModel;
-import com.mobgeek.android.store.network.HttpHelper;
 import com.mobgeek.android.store.ui.fragment.Test1Fragment;
 
 public class MainActivity extends XjSupportActivityImp {

@@ -17,7 +17,7 @@ rxbus使用
          }
      });
 
-    // 需要注册bus
+     // 需要注册bus
      XjBusSubscriptions.bind(this, subscribe);
 
 销毁的时候需要注销bus
