@@ -1,35 +1,29 @@
 package com.mobgeek.android.store.ui.fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.xjcommon.base.XjSupportFragmentImp;
 import com.android.xjcommon.bus.XjBus;
 import com.android.xjcommon.bus.XjBusSubscriptions;
 import com.android.xjcommon.helper.XjPermissionsHelper;
+import com.android.xjmvp.view.XjBaseFragment;
+import com.mobgeek.android.store.ui.Test2Presenter;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class Test2Fragment extends XjSupportFragmentImp {
+public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
 
 
     private XjPermissionsHelper mPermissionsHelper;
 
-    @SuppressLint("CheckResult")
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final TextView textView = new TextView(_mActivity);
+    protected void initView(View view) {
+        TextView textView = view.findViewById(40097);
         textView.setText("\n2号界面加载成功");
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +68,23 @@ public class Test2Fragment extends XjSupportFragmentImp {
                         System.out.println("完成");
                     }
                 });
+    }
+
+    @Override
+    protected View contentLayout() {
+        TextView textView = new TextView(_mActivity);
+        textView.setId(40097);
         return textView;
+    }
+
+    @Override
+    protected int contentLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public Test2Presenter initPresenter() {
+        return new Test2Presenter();
     }
 
 
@@ -88,5 +98,6 @@ public class Test2Fragment extends XjSupportFragmentImp {
     public void onDestroyView() {
         super.onDestroyView();
         XjBusSubscriptions.unbind(this);
+        mPresenter.onDestroy();
     }
 }

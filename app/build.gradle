@@ -30,4 +30,5 @@ dependencies {
     implementation project(':xjhttp')
     implementation project(':xjcommon')
     implementation project(':xjdata')
+    implementation project(':xjmvp')
 }

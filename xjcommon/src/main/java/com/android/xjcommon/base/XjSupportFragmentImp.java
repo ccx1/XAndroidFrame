@@ -20,8 +20,8 @@ import com.android.xjcommon.helper.XjFragmentDelegateHelper;
  */
 public class XjSupportFragmentImp extends Fragment implements XjSupportFragment {
 
-    public FragmentActivity         _mActivity;
-    public XjFragmentDelegateHelper mXJFragmentDelegateHelper = new XjFragmentDelegateHelper(this);
+    public  FragmentActivity         _mActivity;
+    private XjFragmentDelegateHelper mXJFragmentDelegateHelper = new XjFragmentDelegateHelper(this);
 
     @Override
     public void onAttach(Context context) {

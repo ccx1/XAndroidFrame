@@ -1,1 +1,1 @@
-include ':app', ':xjhttp', ':xjdata','xjcommon'
+include ':app', ':xjhttp', ':xjdata', ':xjmvp','xjcommon'
