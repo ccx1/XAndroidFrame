@@ -2,14 +2,12 @@ package com.mobgeek.android.store.ui.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.xjcommon.action.Action1;
-import com.android.xjcommon.helper.XjPermissionsHelper;
 import com.android.xjmvp.view.XjBaseFragment;
-import com.mobgeek.android.store.ui.Test2Presenter;
+import com.mobgeek.android.store.ui.presenter.Test2Presenter;
 
 import io.reactivex.functions.Consumer;
 

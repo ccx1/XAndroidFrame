@@ -1,4 +1,4 @@
-package com.mobgeek.android.store.ui;
+package com.mobgeek.android.store.ui.presenter;
 
 import com.android.xjhttp.callback.ResponseCallback;
 import com.android.xjhttp.model.ResultModel;
