@@ -1,38 +1,33 @@
 package com.mobgeek.android.store;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.view.View;
 
-import com.android.xjcommon.base.XjSupportActivityImp;
 import com.android.xjcommon.common.Common;
+import com.android.xjmvp.view.XjBaseActivity;
 import com.mobgeek.android.store.ui.fragment.Test1Fragment;
 
-public class MainActivity extends XjSupportActivityImp {
+public class MainActivity extends XjBaseActivity<MainPresenter> {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initView() {
         Common.init(this);
         loadRootFragment(R.id.fl, new Test1Fragment());
-
-
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected View contentLayout() {
+        return null;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    protected int contentLayoutId() {
+        return R.layout.activity_main;
     }
+
+    @Override
+    public MainPresenter initPresenter() {
+        return new MainPresenter();
+    }
+
 
 }

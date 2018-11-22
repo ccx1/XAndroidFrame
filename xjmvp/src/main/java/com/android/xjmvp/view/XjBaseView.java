@@ -27,5 +27,10 @@ public interface XjBaseView {
      */
     void showEmpty();
 
+    /**
+     * 统一请求权限方法
+     * @param permissions
+     * @param action1
+     */
     void requestPermission(String[] permissions, Action1<Boolean> action1);
 }

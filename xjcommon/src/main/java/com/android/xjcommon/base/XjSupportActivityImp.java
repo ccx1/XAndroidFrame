@@ -53,7 +53,5 @@ public class XjSupportActivityImp extends AppCompatActivity implements XjSupport
     public void onSupportBackPressed() {
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-    }
+
 }

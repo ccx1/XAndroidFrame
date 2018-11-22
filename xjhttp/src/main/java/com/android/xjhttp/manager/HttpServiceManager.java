@@ -46,7 +46,7 @@ public class HttpServiceManager {
 
                     @Override
                     public void onError(Throwable e) {
-                        callBack.onFailure(e.getMessage());
+                        callBack.onFailure(e.toString());
                     }
 
                     @Override
