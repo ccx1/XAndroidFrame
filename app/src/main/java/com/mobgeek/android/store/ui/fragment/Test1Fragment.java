@@ -31,7 +31,7 @@ public class Test1Fragment extends XjSupportFragmentImp {
             }
         });
 
-        XjBusSubscriptions.bind(this,
+        XjBusSubscriptions.bindAll(this,
                 XjBus.get().subscribe(String.class).map(new Function<Object, Object>() {
                     @Override
                     public Object apply(Object o) throws Exception {

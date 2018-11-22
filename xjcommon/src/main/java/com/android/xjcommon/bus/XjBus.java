@@ -1,10 +1,7 @@
 package com.android.xjcommon.bus;
 
-import com.android.xjcommon.base.XjSupportFragment;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.processors.FlowableProcessor;

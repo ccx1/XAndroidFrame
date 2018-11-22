@@ -1,10 +1,8 @@
 package com.android.xjcommon.common;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import com.android.xjcommon.utils.ToastUtil;
 
 /**
  * @author ccx
@@ -19,6 +17,7 @@ public class Common {
     }
 
     private static void initBasic(Context context) {
+        ToastUtil.init(context);
         Reflex.init(context);
         Initial = true;
     }

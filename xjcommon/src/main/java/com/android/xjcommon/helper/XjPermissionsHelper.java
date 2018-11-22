@@ -176,6 +176,7 @@ public class XjPermissionsHelper {
                     mSubjectMap.remove(permission);
                     boolean granted = grantResults[i] == PackageManager.PERMISSION_GRANTED;
                     subject.onNext(new Permission(permissions[i], granted));
+                    subject.onComplete();
                 }
             }
         });

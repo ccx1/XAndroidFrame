@@ -34,6 +34,14 @@ public class StatusLayout extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
+
+    // 设置内容布局
+    public void setContentView(View view) {
+        contentLayoutID = view.getId();
+        viewTask.put(contentLayoutID, view);
+        showContent();
+    }
+
     // 设置内容布局
     public void setContentView(int id) {
         remove(this.contentLayoutID);
@@ -79,13 +87,6 @@ public class StatusLayout extends FrameLayout {
             viewTask.remove(layoutID);
             this.removeView(view);
         }
-    }
-
-    // 设置内容布局
-    public void setContentView(View view) {
-        contentLayoutID = view.getId();
-        viewTask.put(contentLayoutID, view);
-        showContent();
     }
 
     private void show(int layoutId) {
@@ -141,6 +142,6 @@ public class StatusLayout extends FrameLayout {
     }
 
     public void showEmpty() {
-        show(errorViewID);
+        show(emptyViewID);
     }
 }

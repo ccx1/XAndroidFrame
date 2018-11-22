@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.xjcommon.action.Action1;
 import com.android.xjcommon.base.XjSupportFragmentImp;
+import com.android.xjcommon.helper.XjPermissionsHelper;
 import com.android.xjmvp.R;
 import com.android.xjmvp.presenter.XjBasePresenter;
 import com.android.xjmvp.widget.StatusLayout;
@@ -19,10 +21,12 @@ import com.android.xjmvp.widget.StatusLayout;
  */
 public abstract class XjBaseFragment<P extends XjBasePresenter> extends XjSupportFragmentImp implements XjBaseView {
 
-    public  P            mPresenter;
-    private StatusLayout mStatusLayout;
+    public  P                   mPresenter;
+    private StatusLayout        mStatusLayout;
+    private XjPermissionsHelper mPermissionsHelper;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
@@ -69,6 +73,27 @@ public abstract class XjBaseFragment<P extends XjBasePresenter> extends XjSuppor
     public abstract P initPresenter();
 
     @Override
+    public void requestPermission(String[] permissions, Action1<Boolean> action1) {
+        // 如果之前还没有请求过权限，则需要创建一个权限类
+        if (mPermissionsHelper == null) {
+            mPermissionsHelper = new XjPermissionsHelper(this);
+        }
+        mPermissionsHelper
+                .request(permissions)
+                .subscribe(action1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // 防止其他类型的result
+        if (mPermissionsHelper != null) {
+            mPermissionsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+    }
+
+    @Override
     public void showContent() {
         mStatusLayout.showContent();
     }
@@ -86,5 +111,11 @@ public abstract class XjBaseFragment<P extends XjBasePresenter> extends XjSuppor
     @Override
     public void showEmpty() {
         mStatusLayout.showEmpty();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mPresenter.onDestroy();
     }
 }

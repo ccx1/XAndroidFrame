@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils;
 
 import com.android.xjcommon.R;
 import com.android.xjcommon.base.XjSupportActivity;
-import com.android.xjcommon.base.XjSupportActivityImp;
 import com.android.xjcommon.base.XjSupportFragment;
 import com.android.xjcommon.base.XjSupportFragmentImp;
 

@@ -1,14 +1,13 @@
 package com.android.xjcommon.common;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * 反射类
- *
+ * 统一初始化方法
  * @author ccx
  * @date 2018/11/16
  */
@@ -16,7 +15,7 @@ public class Reflex {
 
     private static final String INIT = "init";
 
-    public static void init(Context context) {
+    static void init(Context context) {
         try {
             initClass(context, "com.android.xjdata.helper.SharedPreferencesHelper");
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {

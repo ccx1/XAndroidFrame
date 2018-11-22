@@ -5,6 +5,9 @@ import android.support.annotation.StringRes;
 
 import com.android.xjmvp.view.XjBaseView;
 
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
 /**
  * @author ccx
  * @date 2018/11/21
@@ -15,7 +18,7 @@ public interface XjBasePresenter<V extends XjBaseView> {
      * 注册
      *
      * @param view    baseview child
-     * @param context activity 或者 app
+     * @param context activity
      */
     void attachView(V view, Context context);
 
@@ -34,6 +37,8 @@ public interface XjBasePresenter<V extends XjBaseView> {
      * 重试，尝试重新连接，请求数据等等
      */
     void retry();
+
+    <T> Disposable createBusInstance(Class<T> clazz, Consumer<? super T> action);
 
     /**
      * 执行回收操作

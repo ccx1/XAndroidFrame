@@ -1,26 +1,22 @@
 package com.mobgeek.android.store.ui.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.xjcommon.bus.XjBus;
-import com.android.xjcommon.bus.XjBusSubscriptions;
+import com.android.xjcommon.action.Action1;
 import com.android.xjcommon.helper.XjPermissionsHelper;
 import com.android.xjmvp.view.XjBaseFragment;
 import com.mobgeek.android.store.ui.Test2Presenter;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
 
 
-    private XjPermissionsHelper mPermissionsHelper;
-
+    @SuppressLint("CheckResult")
     @Override
     protected void initView(View view) {
         TextView textView = view.findViewById(40097);
@@ -31,41 +27,24 @@ public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
                 start(new Test4Fragment());
             }
         });
-        Disposable subscribe = XjBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
+
+        mPresenter.createBusInstance(Integer.class, new Consumer<Integer>() {
             @Override
-            public Object apply(Object o) {
-                return o;
-            }
-        }).subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object s) throws Exception {
-                System.out.println("我在2号界面收到了 " + s);
+            public void accept(Integer integer) throws Exception {
+                System.out.println("我在2号界面收到了 " + integer);
             }
         });
 
-        XjBusSubscriptions.bind(this, subscribe);
-        mPermissionsHelper = new XjPermissionsHelper(this);
-        mPermissionsHelper
-                .request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe(new Observer<Boolean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
+        requestPermission(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                new Action1<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
-                        System.out.println(aBoolean);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
 
                     }
 
                     @Override
-                    public void onComplete() {
-                        System.out.println("完成");
+                    public void onError(Exception e) {
+
                     }
                 });
     }
@@ -87,17 +66,8 @@ public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
         return new Test2Presenter();
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mPermissionsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        XjBusSubscriptions.unbind(this);
-        mPresenter.onDestroy();
     }
 }

@@ -17,7 +17,8 @@ public class Test2Presenter extends XjBasePresenterImp<Test2Fragment> {
 
     @Override
     public void onDestroy() {
-
+        super.onDestroy();
+        // 执行销毁操作
     }
 
 }

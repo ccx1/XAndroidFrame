@@ -1,5 +1,7 @@
 package com.android.xjmvp.view;
 
+import com.android.xjcommon.action.Action1;
+
 /**
  * @author ccx
  * @date 2018/11/21
@@ -24,4 +26,6 @@ public interface XjBaseView {
      * 显示空数据视图
      */
     void showEmpty();
+
+    void requestPermission(String[] permissions, Action1<Boolean> action1);
 }

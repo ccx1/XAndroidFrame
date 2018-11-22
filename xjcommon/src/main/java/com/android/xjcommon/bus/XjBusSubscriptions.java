@@ -1,9 +1,5 @@
 package com.android.xjcommon.bus;
 
-import com.android.xjcommon.base.XjSupportFragment;
-import com.android.xjcommon.base.XjSupportFragmentImp;
-
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -44,11 +39,23 @@ public class XjBusSubscriptions {
         });
     }
 
-    public static void bind(Object o, Disposable... disposable) {
-        bind(o, Arrays.asList(disposable));
+    public static void bindAll(Object o, Disposable... disposable) {
+        bindAll(o, Arrays.asList(disposable));
     }
 
-    public static void bind(Object o, List<Disposable> disposable) {
+
+    public static void bind(Object o, Disposable disposable) {
+        List<Disposable> disposables = mTask.get(o);
+        if (disposables == null) {
+            disposables = new ArrayList<>();
+        }
+        if (!disposables.contains(disposable)) {
+            disposables.add(disposable);
+        }
+        mTask.put(o, disposables);
+    }
+
+    public static void bindAll(Object o, List<Disposable> disposable) {
         List<Disposable> disposables = mTask.get(o);
         if (disposables == null) {
             mTask.put(o, disposable);
