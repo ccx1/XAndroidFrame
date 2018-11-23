@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.xjcommon.base.SupportFragmentImp;
-import com.android.xjcommon.bus.EventBus;
-import com.android.xjcommon.bus.EventBusSubscriptions;
-import com.android.xjdata.helper.SharedPreferencesHelper;
+import com.android.common.base.SupportFragmentImp;
+import com.android.common.bus.EventBus;
+import com.android.common.bus.EventBusSubscriptions;
+import com.android.data.helper.SharedPreferencesHelper;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;

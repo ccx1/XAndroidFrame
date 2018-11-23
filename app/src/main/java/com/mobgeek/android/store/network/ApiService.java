@@ -1,6 +1,6 @@
 package com.mobgeek.android.store.network;
 
-import com.android.xjhttp.model.ResultModel;
+import com.android.http.model.ResultModel;
 
 import java.util.Map;
 

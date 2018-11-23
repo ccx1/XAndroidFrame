@@ -27,8 +27,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxVersion"
-    implementation project(':xjhttp')
-    implementation project(':xjcommon')
-    implementation project(':xjdata')
-    implementation project(':xjmvp')
+    implementation project(':http')
+    implementation project(':common')
+    implementation project(':data')
+    implementation project(':mvp')
 }

@@ -1,24 +1,18 @@
 package com.mobgeek.android.store.network;
 
-import com.android.xjhttp.callback.ResponseCallback;
-import com.android.xjhttp.manager.HttpServiceManager;
-import com.android.xjhttp.manager.OkHttpManager;
-import com.android.xjhttp.manager.RetrofitManager;
-import com.android.xjhttp.model.ResultModel;
+import com.android.http.callback.ResponseCallback;
+import com.android.http.manager.HttpServiceManager;
+import com.android.http.manager.OkHttpManager;
+import com.android.http.manager.RetrofitManager;
+import com.android.http.model.ResultModel;
 
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 import io.reactivex.Observable;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 

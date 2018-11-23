@@ -5,8 +5,8 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.view.View;
 
-import com.android.xjcommon.common.Common;
-import com.android.xjmvp.view.BaseActivity;
+import com.android.common.common.Common;
+import com.android.mvp.view.BaseActivity;
 import com.mobgeek.android.store.ui.fragment.Test1Fragment;
 
 /**

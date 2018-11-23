@@ -1,8 +1,8 @@
 package com.mobgeek.android.store.ui.presenter;
 
-import com.android.xjhttp.callback.ResponseCallback;
-import com.android.xjhttp.model.ResultModel;
-import com.android.xjmvp.presenter.BasePresenterImp;
+import com.android.http.callback.ResponseCallback;
+import com.android.http.model.ResultModel;
+import com.android.mvp.presenter.BasePresenterImp;
 import com.mobgeek.android.store.network.HttpHelper;
 import com.mobgeek.android.store.ui.fragment.Test2Fragment;
 

@@ -5,8 +5,8 @@ import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.xjcommon.action.AbstractAction1;
-import com.android.xjmvp.view.BaseFragment;
+import com.android.common.action.AbstractAction1;
+import com.android.mvp.view.BaseFragment;
 import com.mobgeek.android.store.ui.presenter.Test2Presenter;
 
 import io.reactivex.functions.Consumer;

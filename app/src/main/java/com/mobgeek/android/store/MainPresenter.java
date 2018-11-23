@@ -1,6 +1,6 @@
 package com.mobgeek.android.store;
 
-import com.android.xjmvp.presenter.BasePresenterImp;
+import com.android.mvp.presenter.BasePresenterImp;
 
 /**
  * @author ccx
