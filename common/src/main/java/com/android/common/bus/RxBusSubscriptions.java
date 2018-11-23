@@ -40,7 +40,7 @@ public class RxBusSubscriptions {
     }
 
     public static void bindAll(Object o, Disposable... disposable) {
-        bindAll(o, Arrays.asList(disposable));
+        bindAll(o, new ArrayList<Disposable>(Arrays.asList(disposable)));
     }
 
 

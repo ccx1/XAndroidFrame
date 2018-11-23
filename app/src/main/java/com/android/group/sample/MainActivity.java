@@ -18,11 +18,12 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     protected void initView() {
         Common.init(this);
-        loadRootFragment(com.mobgeek.android.store.R.id.fl, new Test1Fragment());
+        loadRootFragment(R.id.fl, new Test1Fragment());
         BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
         int            battery        = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         System.out.println("" + battery);
     }
+
 
     @Override
     protected View contentLayout() {
@@ -31,7 +32,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     protected int contentLayoutId() {
-        return com.mobgeek.android.store.R.layout.activity_main;
+        return R.layout.activity_main;
     }
 
     @Override

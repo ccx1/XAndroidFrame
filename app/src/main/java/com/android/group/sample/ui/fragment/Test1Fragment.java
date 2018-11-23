@@ -63,8 +63,6 @@ public class Test1Fragment extends SupportFragmentImp {
         return textView;
     }
 
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
