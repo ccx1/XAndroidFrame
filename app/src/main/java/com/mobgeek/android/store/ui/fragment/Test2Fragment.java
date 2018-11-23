@@ -9,6 +9,7 @@ import com.android.xjcommon.action.AbstractAction1;
 import com.android.xjmvp.view.BaseFragment;
 import com.mobgeek.android.store.ui.presenter.Test2Presenter;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class Test2Fragment extends BaseFragment<Test2Presenter> {

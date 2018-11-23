@@ -37,7 +37,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
 
 
     @Override
-    public <T> Disposable createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
+    public <T> void createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
         Disposable subscribe = EventBus.get()
                 .subscribe(clazz)
                 .filter(new Predicate<T>() {
@@ -54,7 +54,6 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
                     }
                 });
         EventBusSubscriptions.bind(mView, subscribe);
-        return subscribe;
     }
 
     @Override

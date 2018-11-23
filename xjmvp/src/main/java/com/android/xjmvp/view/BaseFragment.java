@@ -62,14 +62,29 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
         initView(view);
     }
 
+    /**
+     * 初始化view
+     * @param view
+     */
     protected abstract void initView(View view);
 
+    /**
+     * 返回一个view
+     * @return
+     */
     protected abstract View contentLayout();
 
+    /**
+     * 返回一个view的id
+     * @return
+     */
     @LayoutRes
     protected abstract int contentLayoutId();
 
-
+    /**
+     * 初始化p层
+     * @return
+     */
     public abstract P initPresenter();
 
     @Override

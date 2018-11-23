@@ -34,6 +34,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         initView();
     }
 
+    /**
+     * 初始化
+     */
     protected abstract void initView();
 
     private void initCenterView() {
@@ -52,8 +55,16 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         });
     }
 
+    /**
+     * 返回一个view的容器
+     * @return
+     */
     protected abstract View contentLayout();
 
+    /**
+     * 返回一个view的id
+     * @return
+     */
     protected abstract int contentLayoutId();
 
     @Override
@@ -69,6 +80,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         mStatusLayout.setContentView(view);
     }
 
+    /**
+     * 初始化P层
+     * @return
+     */
     public abstract P initPresenter();
 
     @Override

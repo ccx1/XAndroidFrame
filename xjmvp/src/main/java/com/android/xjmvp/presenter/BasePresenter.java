@@ -5,7 +5,6 @@ import android.support.annotation.StringRes;
 
 import com.android.xjmvp.view.BaseView;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -38,7 +37,15 @@ public interface BasePresenter<V extends BaseView> {
      */
     void retry();
 
-    <T> Disposable createBusInstance(Class<T> clazz, Consumer<? super T> action);
+    /**
+     * 创建Bus
+     *
+     * @param clazz
+     * @param action
+     * @param <T>
+     * @return
+     */
+    <T> void createBusInstance(Class<T> clazz, Consumer<? super T> action);
 
     /**
      * 执行回收操作
@@ -46,9 +53,26 @@ public interface BasePresenter<V extends BaseView> {
     void onDestroy();
 
     // =============== 父类实现方法 ==================
+
+    /**
+     * 吐司一个资源id的string字符串
+     *
+     * @param stringId
+     */
     void showToast(@StringRes int stringId);
 
+    /**
+     * 吐司一个字符串string
+     *
+     * @param msg
+     */
     void showToast(String msg);
 
+    /**
+     * 获取资源id的字符串
+     *
+     * @param strid
+     * @return
+     */
     String getString(@StringRes int strid);
 }
