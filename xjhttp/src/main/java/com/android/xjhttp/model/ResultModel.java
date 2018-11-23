@@ -1,5 +1,8 @@
 package com.android.xjhttp.model;
 
+/**
+ * @author chicunxiang
+ */
 public class ResultModel<T> extends ResultBaseModel {
     private T data;
 

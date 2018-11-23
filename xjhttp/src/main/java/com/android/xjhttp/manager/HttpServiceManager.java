@@ -16,6 +16,9 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
+/**
+ * @author chicunxiang
+ */
 public class HttpServiceManager {
 
     private static HttpServiceManager sHttpServiceManager;

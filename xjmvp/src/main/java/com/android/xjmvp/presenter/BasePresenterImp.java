@@ -2,10 +2,10 @@ package com.android.xjmvp.presenter;
 
 import android.content.Context;
 
-import com.android.xjcommon.bus.XjBus;
-import com.android.xjcommon.bus.XjBusSubscriptions;
+import com.android.xjcommon.bus.Bus;
+import com.android.xjcommon.bus.BusSubscriptions;
 import com.android.xjcommon.utils.ToastUtil;
-import com.android.xjmvp.view.XjBaseView;
+import com.android.xjmvp.view.BaseView;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -15,7 +15,7 @@ import io.reactivex.functions.Predicate;
  * @author ccx
  * @date 2018/11/21
  */
-public abstract class XjBasePresenterImp<V extends XjBaseView> implements XjBasePresenter<V> {
+public abstract class BasePresenterImp<V extends BaseView> implements BasePresenter<V> {
 
     protected Context mContext;
     protected V       mView;
@@ -38,7 +38,7 @@ public abstract class XjBasePresenterImp<V extends XjBaseView> implements XjBase
 
     @Override
     public <T> Disposable createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
-        Disposable subscribe = XjBus.get()
+        Disposable subscribe = Bus.get()
                 .subscribe(clazz)
                 .filter(new Predicate<T>() {
                     @Override
@@ -53,7 +53,7 @@ public abstract class XjBasePresenterImp<V extends XjBaseView> implements XjBase
 
                     }
                 });
-        XjBusSubscriptions.bind(mView, subscribe);
+        BusSubscriptions.bind(mView, subscribe);
         return subscribe;
     }
 
@@ -68,12 +68,12 @@ public abstract class XjBasePresenterImp<V extends XjBaseView> implements XjBase
     }
 
     @Override
-    public String getString(int strid) {
-        return mContext.getString(strid);
+    public String getString(int strId) {
+        return mContext.getString(strId);
     }
 
     @Override
     public void onDestroy() {
-        XjBusSubscriptions.unbind(mView);
+        BusSubscriptions.unbind(mView);
     }
 }

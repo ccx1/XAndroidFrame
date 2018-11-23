@@ -8,17 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.android.xjdata.model.RawBasic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author ccx
  * @date 2018/11/16
  */
-public abstract class XjRawManager extends SQLiteOpenHelper {
-    public XjRawManager(Context context, String name, int version) {
+public abstract class RawManager extends SQLiteOpenHelper {
+    public RawManager(Context context, String name, int version) {
         super(context, name, null, version);
     }
 
@@ -49,7 +46,7 @@ public abstract class XjRawManager extends SQLiteOpenHelper {
      * | _id | value | create_time | last_update |
      */
     protected static class ValueColumn
-            extends XjRawManager.Column {
+            extends RawManager.Column {
         static final String COLUMN_VALUE = "value";
 
         public static String createTableSQL(String tableName) {
@@ -69,7 +66,7 @@ public abstract class XjRawManager extends SQLiteOpenHelper {
      * | _id | name | value | create_time | last_update |
      */
     protected static class NameValueColumn
-            extends XjRawManager.ValueColumn {
+            extends RawManager.ValueColumn {
         private static final String COLUMN_NAME = "name";
 
         public static String createTableSQL(String tableName) {
@@ -86,7 +83,7 @@ public abstract class XjRawManager extends SQLiteOpenHelper {
 
 
     public List<List<RawBasic>> getValues(String tableName, String... col) {
-        synchronized (XjRawManager.class) {
+        synchronized (RawManager.class) {
             SQLiteDatabase db = getReadableDatabase();
             try {
                 List<List<RawBasic>> localMap = getRawColumns(db, tableName, col);

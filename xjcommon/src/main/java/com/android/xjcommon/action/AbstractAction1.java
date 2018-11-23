@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable;
  * @author ccx
  * @date 2018/11/22
  */
-public abstract class Action1<T> implements Observer<T> {
+public abstract class AbstractAction1<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
 

@@ -9,20 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.xjcommon.base.XjSupportFragmentImp;
-import com.android.xjcommon.bus.XjBus;
-import com.android.xjcommon.bus.XjBusSubscriptions;
-import com.android.xjcommon.bus.XjEvent;
+import com.android.xjcommon.base.SupportFragmentImp;
+import com.android.xjcommon.bus.Bus;
+import com.android.xjcommon.bus.BusSubscriptions;
+import com.android.xjcommon.bus.Event;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class Test4Fragment extends XjSupportFragmentImp {
+public class Test4Fragment extends SupportFragmentImp {
     @SuppressLint("CheckResult")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(_mActivity);
+        TextView textView = new TextView(mActivity);
         textView.setText(" \n\n4号界面");
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,15 +30,15 @@ public class Test4Fragment extends XjSupportFragmentImp {
                 start(new Test3Fragment());
             }
         });
-        XjBusSubscriptions.bindAll(this,
-                XjBus.get().subscribe(XjEvent.class).map(new Function<XjEvent, XjEvent>() {
+        BusSubscriptions.bindAll(this,
+                Bus.get().subscribe(Event.class).map(new Function<Event, Event>() {
                     @Override
-                    public XjEvent apply(XjEvent o) throws Exception {
+                    public Event apply(Event o) throws Exception {
                         return o;
                     }
-                }).subscribe(new Consumer<XjEvent>() {
+                }).subscribe(new Consumer<Event>() {
                     @Override
-                    public void accept(XjEvent s) throws Exception {
+                    public void accept(Event s) throws Exception {
                         System.out.println("我在4号界面收到了 " + s.getTag());
                     }
                 }));
@@ -50,6 +50,6 @@ public class Test4Fragment extends XjSupportFragmentImp {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        XjBusSubscriptions.unbind(this);
+        BusSubscriptions.unbind(this);
     }
 }

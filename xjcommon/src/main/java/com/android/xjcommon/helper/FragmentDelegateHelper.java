@@ -9,26 +9,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.android.xjcommon.R;
-import com.android.xjcommon.base.XjSupportActivity;
-import com.android.xjcommon.base.XjSupportFragmentImp;
+import com.android.xjcommon.base.SupportActivity;
+import com.android.xjcommon.base.SupportFragment;
+import com.android.xjcommon.base.SupportFragmentImp;
 
-import static com.android.xjcommon.helper.XjTransactionDelegate.FRAGMENTATION_ARG_CONTAINER;
+import static com.android.xjcommon.helper.TransactionDelegate.FRAGMENTATION_ARG_CONTAINER;
 
 /**
  * @author ccx
  * @date 2018/11/15
  */
-public class XjFragmentDelegateHelper {
-    private final XjSupportFragmentImp  mXjF;
-    private final Fragment              mFragment;
-    private       XjTransactionDelegate mTransactionDelegate;
-    private       XjSupportActivity     mSupport;
-    private       FragmentActivity      _mActivity;
-    public        int                   mContainerId;
-    private       Animation             mExitAnim;
-    private       Animation             mEnterAnim;
+public class FragmentDelegateHelper {
+    private final SupportFragment     mXjF;
+    private final Fragment            mFragment;
+    private       TransactionDelegate mTransactionDelegate;
+    private       SupportActivity     mSupport;
+    private       FragmentActivity    mActivity;
+    public        int                 mContainerId;
+    private       Animation           mExitAnim;
+    private       Animation           mEnterAnim;
 
-    public XjFragmentDelegateHelper(XjSupportFragmentImp fragment) {
+    public FragmentDelegateHelper(SupportFragment fragment) {
         this.mXjF = fragment;
         this.mFragment = (Fragment) fragment;
     }
@@ -38,7 +39,7 @@ public class XjFragmentDelegateHelper {
      *
      * @param fragment
      */
-    public void start(XjSupportFragmentImp fragment) {
+    public void start(SupportFragmentImp fragment) {
         mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment);
     }
 
@@ -76,7 +77,7 @@ public class XjFragmentDelegateHelper {
 
     public Animation getExitAnimation() {
         if (mExitAnim == null) {
-            mExitAnim = AnimationUtils.loadAnimation(_mActivity.getApplicationContext(), R.anim.anim_fragment_exit);
+            mExitAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_fragment_exit);
         }
 
         return mExitAnim;
@@ -84,7 +85,7 @@ public class XjFragmentDelegateHelper {
 
     public Animation getEnterAnimation() {
         if (mEnterAnim == null) {
-            mEnterAnim = AnimationUtils.loadAnimation(_mActivity.getApplicationContext(), R.anim.anim_fragment_enter);
+            mEnterAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_fragment_enter);
         }
         return mEnterAnim;
     }
@@ -96,9 +97,9 @@ public class XjFragmentDelegateHelper {
      * @param activity
      */
     public void onAttach(Activity activity) {
-        if (activity instanceof XjSupportActivity) {
-            this.mSupport = (XjSupportActivity) activity;
-            this._mActivity = (FragmentActivity) activity;
+        if (activity instanceof SupportActivity) {
+            this.mSupport = (SupportActivity) activity;
+            this.mActivity = (FragmentActivity) activity;
             mTransactionDelegate = mSupport.getSupportDelegate().getTransactionDelegate();
         } else {
             throw new RuntimeException(activity.getClass().getSimpleName() + " must impl ISupportActivity!");

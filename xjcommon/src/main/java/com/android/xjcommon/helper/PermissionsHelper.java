@@ -26,7 +26,7 @@ import io.reactivex.subjects.PublishSubject;
  * @author ccx
  * @date 2018/11/16
  */
-public class XjPermissionsHelper {
+public class PermissionsHelper {
 
     private static       Object                                  TRIGGER                  = new Object();
     private              FragmentActivity                        mActivity;
@@ -34,15 +34,15 @@ public class XjPermissionsHelper {
     private              Map<String, PublishSubject<Permission>> mSubjectMap              = new HashMap<>();
     private static final int                                     PERMISSIONS_REQUEST_CODE = 1002;
 
-    public XjPermissionsHelper(FragmentActivity activity) {
+    public PermissionsHelper(FragmentActivity activity) {
         this(activity, null);
     }
 
-    public XjPermissionsHelper(Fragment fragment) {
+    public PermissionsHelper(Fragment fragment) {
         this(null, fragment);
     }
 
-    private XjPermissionsHelper(FragmentActivity activity, Fragment fragment) {
+    private PermissionsHelper(FragmentActivity activity, Fragment fragment) {
         this.mActivity = activity;
         this.mFragment = fragment;
         if (activity == null && fragment != null) {

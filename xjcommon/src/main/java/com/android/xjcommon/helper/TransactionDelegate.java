@@ -4,19 +4,15 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
-import com.android.xjcommon.R;
-import com.android.xjcommon.base.XjSupportActivity;
-import com.android.xjcommon.base.XjSupportFragment;
-import com.android.xjcommon.common.Reflex;
-import com.android.xjcommon.manager.XjFragmentManager;
+import com.android.xjcommon.base.SupportActivity;
+import com.android.xjcommon.base.SupportFragment;
+import com.android.xjcommon.manager.FragmentManager;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,30 +27,30 @@ import io.reactivex.schedulers.Schedulers;
  * @author ccx
  * @date 2018/11/15
  */
-public class XjTransactionDelegate {
+public class TransactionDelegate {
 
 
-    static final  String            FRAGMENTATION_ARG_CONTAINER = "fragmentation_arg_container";
-    private final XjSupportActivity support;
-    private final FragmentActivity  mActivity;
+    static final  String           FRAGMENTATION_ARG_CONTAINER = "fragmentation_arg_container";
+    private final SupportActivity  support;
+    private final FragmentActivity mActivity;
 
 
-    public XjTransactionDelegate(XjSupportActivity xjSupportActivity) {
+    public TransactionDelegate(SupportActivity xjSupportActivity) {
         this.support = xjSupportActivity;
         this.mActivity = (FragmentActivity) support;
     }
 
     @SuppressLint("CheckResult")
-    public void dispatchStartTransaction(final FragmentManager fragmentManager, final XjSupportFragment fragment) {
+    public void dispatchStartTransaction(final android.support.v4.app.FragmentManager fragmentManager, final SupportFragment fragment) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                XjSupportFragment topFragment = XjFragmentManager.getInstance().getTopFragment();
-                int               anInt       = getContainerId((Fragment) topFragment);
+                SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
+                int             anInt       = getContainerId((Fragment) topFragment);
                 fragmentManager.beginTransaction().add(anInt, (Fragment) fragment).commit();
                 // 每一级都需要存储容器值
                 bindContainerId(anInt, fragment);
-                XjFragmentManager.getInstance().pushOneFragment(fragment);
+                FragmentManager.getInstance().pushOneFragment(fragment);
             }
         });
     }
@@ -66,20 +62,20 @@ public class XjTransactionDelegate {
     }
 
     @SuppressLint("CheckResult")
-    public void loadRootTransaction(final FragmentManager supportFragmentManager, final int containerId, final XjSupportFragment tofragment, final String name) {
+    public void loadRootTransaction(final android.support.v4.app.FragmentManager supportFragmentManager, final int containerId, final SupportFragment tofragment, final String name) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
                 // 重新查找fragment，activity重启的时候，会重新调用此方法，而此时，不要进行覆盖处理
                 bindContainerId(containerId, tofragment);
                 supportFragmentManager.beginTransaction().add(containerId, (Fragment) tofragment, name).commit();
-                XjFragmentManager.getInstance().pushOneFragment(tofragment);
+                FragmentManager.getInstance().pushOneFragment(tofragment);
                 // 由于被销毁一次。所以，需要重新绑定数据
             }
         });
     }
 
-    private void bindContainerId(int containerId, XjSupportFragment tofragment) {
+    private void bindContainerId(int containerId, SupportFragment tofragment) {
         if (tofragment != null) {
             Bundle arguments = getArguments((Fragment) tofragment);
             if (arguments != null) {
@@ -100,14 +96,14 @@ public class XjTransactionDelegate {
 
 
     @SuppressLint("CheckResult")
-    public void pop(final FragmentManager fragmentManager) {
+    public void pop(final android.support.v4.app.FragmentManager fragmentManager) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                XjSupportFragment topFragment = XjFragmentManager.getInstance().getTopFragment();
+                SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
                 try {
                     fragmentManager.beginTransaction().remove((Fragment) topFragment).commit();
-                    XjFragmentManager.getInstance().PopOneFragment(topFragment);
+                    FragmentManager.getInstance().PopOneFragment(topFragment);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -116,7 +112,7 @@ public class XjTransactionDelegate {
     }
 
 
-    public void popTo(final Class<?> targetFragment, final boolean includeTargetFragment, final FragmentManager supportFragmentManager) {
+    public void popTo(final Class<?> targetFragment, final boolean includeTargetFragment, final android.support.v4.app.FragmentManager supportFragmentManager) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
@@ -127,7 +123,7 @@ public class XjTransactionDelegate {
     }
 
     @SuppressLint("CheckResult")
-    private void safePopTo(String name, boolean includeTargetFragment, final FragmentManager supportFragmentManager) {
+    private void safePopTo(String name, boolean includeTargetFragment, final android.support.v4.app.FragmentManager supportFragmentManager) {
         if (supportFragmentManager == null) {
             return;
         }
@@ -136,7 +132,7 @@ public class XjTransactionDelegate {
             return;
         }
         // 获取除了目标的栈上部fragment
-        final List<XjSupportFragment> willPopFragments = XjFragmentManager.getInstance().getWillPopFragments(supportFragmentManager, name, includeTargetFragment);
+        final List<SupportFragment> willPopFragments = FragmentManager.getInstance().getWillPopFragments(supportFragmentManager, name, includeTargetFragment);
         if (willPopFragments.size() == 0) {
             return;
         }
@@ -167,9 +163,9 @@ public class XjTransactionDelegate {
                     @Override
                     public ViewGroup apply(final ViewGroup view) throws Exception {
                         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-                        for (XjSupportFragment willPopFragment : willPopFragments) {
+                        for (SupportFragment willPopFragment : willPopFragments) {
                             fragmentTransaction.remove((Fragment) willPopFragment);
-                            XjFragmentManager.getInstance().PopOneFragment(willPopFragment);
+                            FragmentManager.getInstance().PopOneFragment(willPopFragment);
                         }
                         fragmentTransaction.commitAllowingStateLoss();
                         // 让动画只执行一次。不能执行多次动画
@@ -260,7 +256,7 @@ public class XjTransactionDelegate {
 
     public void dispatchBackPressedEvent() {
         // 如果栈内有fragment，则操作fragment的回调事件，如果没有则操作activity的事件
-        XjSupportFragment topFragment = XjFragmentManager.getInstance().getTopFragment();
+        SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
         // 如果栈顶fragment== null。则调用Activity的Fragment
         if (topFragment == null) {
             support.onSupportBackPressed();

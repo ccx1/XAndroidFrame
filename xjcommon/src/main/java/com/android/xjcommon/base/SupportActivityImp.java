@@ -5,10 +5,13 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.android.xjcommon.helper.XjActivityDelegateHelper;
+import com.android.xjcommon.helper.ActivityDelegateHelper;
 
-public class XjSupportActivityImp extends AppCompatActivity implements XjSupportActivity {
-    private XjActivityDelegateHelper mXjActivityDelegateHelper = new XjActivityDelegateHelper(this);
+/**
+ * @author chicunxiang
+ */
+public class SupportActivityImp extends AppCompatActivity implements SupportActivity {
+    private ActivityDelegateHelper mXjActivityDelegateHelper = new ActivityDelegateHelper(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -17,7 +20,7 @@ public class XjSupportActivityImp extends AppCompatActivity implements XjSupport
     }
 
 
-    public void start(XjSupportFragmentImp fragment) {
+    public void start(SupportFragmentImp fragment) {
         mXjActivityDelegateHelper.start(fragment);
     }
 
@@ -26,17 +29,17 @@ public class XjSupportActivityImp extends AppCompatActivity implements XjSupport
     }
 
 
-    public void popTo(Class<? extends XjSupportFragment> targetFragment) {
+    public void popTo(Class<? extends SupportFragment> targetFragment) {
         mXjActivityDelegateHelper.popTo(targetFragment);
     }
 
     @Override
-    public void loadRootFragment(@IdRes int containerId, XjSupportFragment fragment) {
+    public void loadRootFragment(@IdRes int containerId, SupportFragment fragment) {
         mXjActivityDelegateHelper.loadRootFragment(containerId, fragment);
     }
 
     @Override
-    public XjActivityDelegateHelper getSupportDelegate() {
+    public ActivityDelegateHelper getSupportDelegate() {
         return mXjActivityDelegateHelper;
     }
 

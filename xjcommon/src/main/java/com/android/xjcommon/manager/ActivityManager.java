@@ -5,17 +5,20 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XjAcitivtyManager {
+/**
+ * @author chicunxiang
+ */
+public class ActivityManager {
 
-    private static XjAcitivtyManager sXjAcitivtyManager;
-    private        List<Activity>    mActivitieTask = new ArrayList<>();
+    private static ActivityManager sXjAcitivtyManager;
+    private        List<Activity>  mActivitieTask = new ArrayList<>();
 
-    private XjAcitivtyManager() {
+    private ActivityManager() {
     }
 
-    public static XjAcitivtyManager getInstance() {
+    public static ActivityManager getInstance() {
         if (sXjAcitivtyManager == null) {
-            sXjAcitivtyManager = new XjAcitivtyManager();
+            sXjAcitivtyManager = new ActivityManager();
         }
         return sXjAcitivtyManager;
     }

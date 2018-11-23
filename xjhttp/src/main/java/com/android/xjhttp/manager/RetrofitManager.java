@@ -8,6 +8,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * @author chicunxiang
+ */
 public class RetrofitManager {
 
     private static RetrofitManager sRetrofitManager;

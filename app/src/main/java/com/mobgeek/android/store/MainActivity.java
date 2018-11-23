@@ -3,10 +3,10 @@ package com.mobgeek.android.store;
 import android.view.View;
 
 import com.android.xjcommon.common.Common;
-import com.android.xjmvp.view.XjBaseActivity;
+import com.android.xjmvp.view.BaseActivity;
 import com.mobgeek.android.store.ui.fragment.Test1Fragment;
 
-public class MainActivity extends XjBaseActivity<MainPresenter> {
+public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     protected void initView() {

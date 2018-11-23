@@ -8,21 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.xjcommon.base.XjSupportFragmentImp;
-import com.android.xjcommon.bus.XjBus;
-import com.android.xjcommon.bus.XjBusSubscriptions;
+import com.android.xjcommon.base.SupportFragmentImp;
+import com.android.xjcommon.bus.Bus;
+import com.android.xjcommon.bus.BusSubscriptions;
 import com.android.xjdata.helper.SharedPreferencesHelper;
 
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class Test1Fragment extends XjSupportFragmentImp {
+public class Test1Fragment extends SupportFragmentImp {
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView textView = new TextView(_mActivity);
+        TextView textView = new TextView(mActivity);
         textView.setText("1号界面");
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,8 +31,8 @@ public class Test1Fragment extends XjSupportFragmentImp {
             }
         });
 
-        XjBusSubscriptions.bindAll(this,
-                XjBus.get().subscribe(String.class).map(new Function<Object, Object>() {
+        BusSubscriptions.bindAll(this,
+                Bus.get().subscribe(String.class).map(new Function<Object, Object>() {
                     @Override
                     public Object apply(Object o) throws Exception {
                         return o;
@@ -43,7 +43,7 @@ public class Test1Fragment extends XjSupportFragmentImp {
                         System.out.println("我在1号界面收到了 " + o);
                     }
                 }),
-                XjBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
+                Bus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
                     @Override
                     public Object apply(Object o) throws Exception {
                         return o;
@@ -65,6 +65,6 @@ public class Test1Fragment extends XjSupportFragmentImp {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        XjBusSubscriptions.unbind(this);
+        BusSubscriptions.unbind(this);
     }
 }

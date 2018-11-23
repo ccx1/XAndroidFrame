@@ -1,7 +1,6 @@
 package com.android.xjhttp.interceptors;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,6 +10,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * @author chicunxiang
+ */
 public class LoggerInterceptor implements Interceptor {
     private String TAG = "request";
 

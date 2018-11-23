@@ -12,21 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
-import com.android.xjcommon.helper.XjFragmentDelegateHelper;
+import com.android.xjcommon.helper.FragmentDelegateHelper;
 
 /**
  * @author ccx
  * @date 2018/11/15
  */
-public class XjSupportFragmentImp extends Fragment implements XjSupportFragment {
+public class SupportFragmentImp extends Fragment implements SupportFragment {
 
-    public  FragmentActivity         _mActivity;
-    private XjFragmentDelegateHelper mXJFragmentDelegateHelper = new XjFragmentDelegateHelper(this);
+    public  FragmentActivity       mActivity;
+    private FragmentDelegateHelper mXJFragmentDelegateHelper = new FragmentDelegateHelper(this);
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        _mActivity = getActivity();
+        mActivity = getActivity();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class XjSupportFragmentImp extends Fragment implements XjSupportFragment 
         mXJFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
     }
 
-    public void start(XjSupportFragmentImp fragment) {
+    public void start(SupportFragmentImp fragment) {
         mXJFragmentDelegateHelper.start(fragment);
     }
 

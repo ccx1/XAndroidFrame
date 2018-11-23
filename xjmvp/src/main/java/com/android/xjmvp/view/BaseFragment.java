@@ -8,22 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.xjcommon.action.Action1;
-import com.android.xjcommon.base.XjSupportFragmentImp;
-import com.android.xjcommon.helper.XjPermissionsHelper;
+import com.android.xjcommon.action.AbstractAction1;
+import com.android.xjcommon.base.SupportFragmentImp;
+import com.android.xjcommon.helper.PermissionsHelper;
 import com.android.xjmvp.R;
-import com.android.xjmvp.presenter.XjBasePresenter;
+import com.android.xjmvp.presenter.BasePresenter;
 import com.android.xjmvp.widget.StatusLayout;
 
 /**
  * @author ccx
  * @date 2018/11/21
  */
-public abstract class XjBaseFragment<P extends XjBasePresenter> extends XjSupportFragmentImp implements XjBaseView {
+public abstract class BaseFragment<P extends BasePresenter> extends SupportFragmentImp implements BaseView {
 
-    public  P                   mPresenter;
-    private StatusLayout        mStatusLayout;
-    private XjPermissionsHelper mPermissionsHelper;
+    public  P                 mPresenter;
+    private StatusLayout      mStatusLayout;
+    private PermissionsHelper mPermissionsHelper;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -73,10 +73,10 @@ public abstract class XjBaseFragment<P extends XjBasePresenter> extends XjSuppor
     public abstract P initPresenter();
 
     @Override
-    public void requestPermission(String[] permissions, Action1<Boolean> action1) {
+    public void requestPermission(String[] permissions, AbstractAction1<Boolean> action1) {
         // 如果之前还没有请求过权限，则需要创建一个权限类
         if (mPermissionsHelper == null) {
-            mPermissionsHelper = new XjPermissionsHelper(this);
+            mPermissionsHelper = new PermissionsHelper(this);
         }
         mPermissionsHelper
                 .request(permissions)

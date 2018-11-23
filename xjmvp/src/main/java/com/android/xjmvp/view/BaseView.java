@@ -1,12 +1,12 @@
 package com.android.xjmvp.view;
 
-import com.android.xjcommon.action.Action1;
+import com.android.xjcommon.action.AbstractAction1;
 
 /**
  * @author ccx
  * @date 2018/11/21
  */
-public interface XjBaseView {
+public interface BaseView {
     /**
      * 显示内容视图
      */
@@ -32,5 +32,5 @@ public interface XjBaseView {
      * @param permissions
      * @param action1
      */
-    void requestPermission(String[] permissions, Action1<Boolean> action1);
+    void requestPermission(String[] permissions, AbstractAction1<Boolean> action1);
 }

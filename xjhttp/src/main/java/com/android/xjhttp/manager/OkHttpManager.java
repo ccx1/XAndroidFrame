@@ -1,15 +1,16 @@
 package com.android.xjhttp.manager;
 
 import com.android.xjhttp.interceptors.BasicInterceptor;
-import com.android.xjhttp.interceptors.CookieInterceptor;
 import com.android.xjhttp.interceptors.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 
+/**
+ * @author chicunxiang
+ */
 public class OkHttpManager {
 
     private static OkHttpManager sHttpManager;

@@ -3,7 +3,7 @@ package com.android.xjmvp.presenter;
 import android.content.Context;
 import android.support.annotation.StringRes;
 
-import com.android.xjmvp.view.XjBaseView;
+import com.android.xjmvp.view.BaseView;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer;
  * @author ccx
  * @date 2018/11/21
  */
-public interface XjBasePresenter<V extends XjBaseView> {
+public interface BasePresenter<V extends BaseView> {
 
     /**
      * 注册

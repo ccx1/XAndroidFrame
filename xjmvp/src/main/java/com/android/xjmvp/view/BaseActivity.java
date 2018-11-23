@@ -5,23 +5,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.android.xjcommon.action.Action1;
-import com.android.xjcommon.base.XjSupportActivityImp;
-import com.android.xjcommon.helper.XjPermissionsHelper;
+import com.android.xjcommon.action.AbstractAction1;
+import com.android.xjcommon.base.SupportActivityImp;
+import com.android.xjcommon.helper.PermissionsHelper;
 import com.android.xjmvp.R;
-import com.android.xjmvp.presenter.XjBasePresenter;
+import com.android.xjmvp.presenter.BasePresenter;
 import com.android.xjmvp.widget.StatusLayout;
 
 /**
  * @author ccx
  * @date 2018/11/22
  */
-public abstract class XjBaseActivity<P extends XjBasePresenter> extends XjSupportActivityImp implements XjBaseView {
+public abstract class BaseActivity<P extends BasePresenter> extends SupportActivityImp implements BaseView {
 
-    private              P                   mPresenter;
-    private              XjPermissionsHelper mPermissionsHelper;
-    private              StatusLayout        mStatusLayout;
-    private static final int                 defaultBaseContentId = 100092;
+    private              P                 mPresenter;
+    private              PermissionsHelper mPermissionsHelper;
+    private              StatusLayout      mStatusLayout;
+    private static final int               DEFAULT_BASE_CONTENT_ID = 100092;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -64,7 +64,7 @@ public abstract class XjBaseActivity<P extends XjBasePresenter> extends XjSuppor
     @Override
     public void setContentView(View view) {
         if (view.getId() == -1) {
-            view.setId(defaultBaseContentId);
+            view.setId(DEFAULT_BASE_CONTENT_ID);
         }
         mStatusLayout.setContentView(view);
     }
@@ -102,10 +102,10 @@ public abstract class XjBaseActivity<P extends XjBasePresenter> extends XjSuppor
     }
 
     @Override
-    public void requestPermission(String[] permissions, Action1<Boolean> action1) {
+    public void requestPermission(String[] permissions, AbstractAction1<Boolean> action1) {
         // 避免造成不必要的浪费
         if (mPermissionsHelper == null) {
-            mPermissionsHelper = new XjPermissionsHelper(this);
+            mPermissionsHelper = new PermissionsHelper(this);
         }
         mPermissionsHelper
                 .request(permissions)

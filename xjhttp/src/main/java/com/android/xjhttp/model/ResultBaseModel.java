@@ -2,6 +2,9 @@ package com.android.xjhttp.model;
 
 import java.io.Serializable;
 
+/**
+ * @author chicunxiang
+ */
 public class ResultBaseModel implements Serializable {
 
     private Integer code;

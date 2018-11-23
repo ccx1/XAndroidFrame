@@ -2,7 +2,7 @@ package com.mobgeek.android.store.ui.presenter;
 
 import com.android.xjhttp.callback.ResponseCallback;
 import com.android.xjhttp.model.ResultModel;
-import com.android.xjmvp.presenter.XjBasePresenterImp;
+import com.android.xjmvp.presenter.BasePresenterImp;
 import com.mobgeek.android.store.network.HttpHelper;
 import com.mobgeek.android.store.ui.fragment.Test2Fragment;
 
@@ -10,7 +10,7 @@ import com.mobgeek.android.store.ui.fragment.Test2Fragment;
  * @author ccx
  * @date 2018/11/21
  */
-public class Test2Presenter extends XjBasePresenterImp<Test2Fragment> {
+public class Test2Presenter extends BasePresenterImp<Test2Fragment> {
 
     @Override
     public void initPresenterData() {

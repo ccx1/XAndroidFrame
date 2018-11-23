@@ -1,35 +1,37 @@
 package com.android.xjcommon.manager;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
-import com.android.xjcommon.base.XjSupportFragment;
+import com.android.xjcommon.base.SupportFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class XjFragmentManager {
-    private static List<XjSupportFragment> task = new ArrayList<>();
-    private static XjFragmentManager       sFragmentManager;
+/**
+ * @author chicunxiang
+ */
+public class FragmentManager {
+    private static List<SupportFragment> task = new ArrayList<>();
+    private static FragmentManager       sFragmentManager;
 
-    private XjFragmentManager() {
+    private FragmentManager() {
     }
 
-    public static XjFragmentManager getInstance() {
+    public static FragmentManager getInstance() {
         if (sFragmentManager == null) {
-            sFragmentManager = new XjFragmentManager();
+            sFragmentManager = new FragmentManager();
         }
         return sFragmentManager;
     }
 
-    public void pushOneFragment(XjSupportFragment f) {
+    public void pushOneFragment(SupportFragment f) {
         if (f != null && !task.contains(f)) {
             task.add(0, f);
         }
     }
 
-    public void PopOneFragment(XjSupportFragment f) {
+    public void PopOneFragment(SupportFragment f) {
         if (task.contains(f)) {
             task.remove(f);
             f = null;
@@ -40,18 +42,18 @@ public class XjFragmentManager {
         return task.size();
     }
 
-    public XjSupportFragment getTopFragment() {
-        XjSupportFragment fragment = null;
+    public SupportFragment getTopFragment() {
+        SupportFragment fragment = null;
         if (task.size() != 0) {
             fragment = task.get(0);
         }
         return fragment;
     }
 
-    public List<XjSupportFragment> getWillPopFragments(FragmentManager supportFragmentManager, String tag, boolean includeTargetFragment) {
+    public List<SupportFragment> getWillPopFragments(android.support.v4.app.FragmentManager supportFragmentManager, String tag, boolean includeTargetFragment) {
         Fragment targetFragment = supportFragmentManager.findFragmentByTag(tag);
 
-        List<XjSupportFragment> list = new ArrayList<>();
+        List<SupportFragment> list = new ArrayList<>();
         if (targetFragment == null) {
             return list;
         }

@@ -5,13 +5,13 @@ import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.xjcommon.action.Action1;
-import com.android.xjmvp.view.XjBaseFragment;
+import com.android.xjcommon.action.AbstractAction1;
+import com.android.xjmvp.view.BaseFragment;
 import com.mobgeek.android.store.ui.presenter.Test2Presenter;
 
 import io.reactivex.functions.Consumer;
 
-public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
+public class Test2Fragment extends BaseFragment<Test2Presenter> {
 
 
     @SuppressLint("CheckResult")
@@ -34,7 +34,7 @@ public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
         });
 
         requestPermission(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                new Action1<Boolean>() {
+                new AbstractAction1<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
 
@@ -49,7 +49,7 @@ public class Test2Fragment extends XjBaseFragment<Test2Presenter> {
 
     @Override
     protected View contentLayout() {
-        TextView textView = new TextView(_mActivity);
+        TextView textView = new TextView(mActivity);
         textView.setId(40097);
         return textView;
     }

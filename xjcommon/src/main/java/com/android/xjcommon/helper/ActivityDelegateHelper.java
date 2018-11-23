@@ -7,37 +7,38 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.android.xjcommon.R;
-import com.android.xjcommon.base.XjSupportActivity;
-import com.android.xjcommon.base.XjSupportFragment;
-import com.android.xjcommon.base.XjSupportFragmentImp;
+import com.android.xjcommon.base.SupportActivity;
+import com.android.xjcommon.base.SupportFragment;
+import com.android.xjcommon.base.SupportFragmentImp;
 
 /**
  * @author ccx
  * @date 2018/11/15
  */
-public class XjActivityDelegateHelper {
+public class ActivityDelegateHelper {
 
-    private final XjSupportActivity xjSupportActivity;
-    private final FragmentActivity  mActivity;
+    private final SupportActivity  mSupportActivity;
+    private final FragmentActivity mActivity;
 
-    private XjTransactionDelegate mXjTransactionDelegate;
-    private Animation             mExitAnim;
-    private Animation             mEnterAnim;
+    private TransactionDelegate mXjTransactionDelegate;
+    private Animation           mExitAnim;
+    private Animation           mEnterAnim;
 
-    public XjActivityDelegateHelper(XjSupportActivity xjSupportActivity) {
-        if (xjSupportActivity == null)
+    public ActivityDelegateHelper(SupportActivity supportActivity) {
+        if (supportActivity == null) {
             throw new RuntimeException("Must extends FragmentActivity/AppCompatActivity");
-        this.xjSupportActivity = xjSupportActivity;
-        this.mActivity = (FragmentActivity) xjSupportActivity;
+        }
+        this.mSupportActivity = supportActivity;
+        this.mActivity = (FragmentActivity) supportActivity;
         getTransactionDelegate();
     }
 
-    public void loadRootFragment(int containerId, XjSupportFragment tofragment) {
+    public void loadRootFragment(int containerId, SupportFragment tofragment) {
         String name = tofragment.getClass().getName();
         loadRootTransaction(getSupportFragmentManager(), containerId, tofragment, name);
     }
 
-    private void loadRootTransaction(FragmentManager supportFragmentManager, int containerId, XjSupportFragment tofragment, String name) {
+    private void loadRootTransaction(FragmentManager supportFragmentManager, int containerId, SupportFragment tofragment, String name) {
         mXjTransactionDelegate.loadRootTransaction(supportFragmentManager, containerId, tofragment, name);
     }
 
@@ -45,11 +46,11 @@ public class XjActivityDelegateHelper {
         return mActivity.getSupportFragmentManager();
     }
 
-    public void start(XjSupportFragmentImp fragment) {
+    public void start(SupportFragmentImp fragment) {
         start(mActivity.getSupportFragmentManager(), fragment);
     }
 
-    private void start(FragmentManager fragmentManager, XjSupportFragment tofragment) {
+    private void start(FragmentManager fragmentManager, SupportFragment tofragment) {
         mXjTransactionDelegate.dispatchStartTransaction(fragmentManager, tofragment);
     }
 
@@ -58,9 +59,9 @@ public class XjActivityDelegateHelper {
     }
 
 
-    public XjTransactionDelegate getTransactionDelegate() {
+    public TransactionDelegate getTransactionDelegate() {
         if (mXjTransactionDelegate == null) {
-            mXjTransactionDelegate = new XjTransactionDelegate(xjSupportActivity);
+            mXjTransactionDelegate = new TransactionDelegate(mSupportActivity);
         }
         return mXjTransactionDelegate;
     }
@@ -75,7 +76,7 @@ public class XjActivityDelegateHelper {
      *
      * @param targetFragment 回到目标fragment
      */
-    public void popTo(Class<? extends XjSupportFragment> targetFragment) {
+    public void popTo(Class<? extends SupportFragment> targetFragment) {
         popTo(targetFragment, false);
     }
 
@@ -84,7 +85,7 @@ public class XjActivityDelegateHelper {
      *
      * @param targetFragment 回到目标fragment
      */
-    public void popTo(Class<? extends XjSupportFragment> targetFragment, boolean includeTargetFragment) {
+    public void popTo(Class<? extends SupportFragment> targetFragment, boolean includeTargetFragment) {
         mXjTransactionDelegate.popTo(targetFragment, includeTargetFragment, getSupportFragmentManager());
     }
 

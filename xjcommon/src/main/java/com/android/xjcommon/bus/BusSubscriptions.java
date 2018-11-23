@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2018/11/16
  */
 
-public class XjBusSubscriptions {
+public class BusSubscriptions {
     private static Map<Object, List<Disposable>> mTask = new HashMap<>();
 
 

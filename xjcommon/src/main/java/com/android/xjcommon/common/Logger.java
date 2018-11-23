@@ -1,10 +1,12 @@
 package com.android.xjcommon.common;
 
-import android.os.Build;
 import android.util.Log;
 
 import com.android.xjcommon.BuildConfig;
 
+/**
+ * @author chicunxiang
+ */
 public class Logger {
 
 

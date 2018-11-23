@@ -4,12 +4,12 @@ package com.android.xjcommon.bus;
  * @author ccx
  * @date 2018/11/16
  */
-public class XjEvent<T> {
+public class Event<T> {
 
     private String tag;
     private T      t;
 
-    public XjEvent(String tag, T t) {
+    public Event(String tag, T t) {
         this.tag = tag;
         this.t = t;
     }
