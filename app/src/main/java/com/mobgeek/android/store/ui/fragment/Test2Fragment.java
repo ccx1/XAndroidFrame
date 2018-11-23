@@ -9,13 +9,15 @@ import com.android.xjcommon.action.AbstractAction1;
 import com.android.xjmvp.view.BaseFragment;
 import com.mobgeek.android.store.ui.presenter.Test2Presenter;
 
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * @author chicunxiang
+ */
 public class Test2Fragment extends BaseFragment<Test2Presenter> {
 
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "ResourceType"})
     @Override
     protected void initView(View view) {
         TextView textView = view.findViewById(40097);
@@ -48,6 +50,7 @@ public class Test2Fragment extends BaseFragment<Test2Presenter> {
                 });
     }
 
+    @SuppressLint("ResourceType")
     @Override
     protected View contentLayout() {
         TextView textView = new TextView(mActivity);

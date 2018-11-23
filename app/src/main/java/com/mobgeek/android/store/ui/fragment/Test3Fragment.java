@@ -14,6 +14,9 @@ import com.android.xjcommon.bus.EventBusSubscriptions;
 import com.android.xjcommon.bus.Event;
 import com.android.xjdata.helper.SharedPreferencesHelper;
 
+/**
+ * @author chicunxiang
+ */
 public class Test3Fragment extends SupportFragmentImp {
     @Nullable
     @Override

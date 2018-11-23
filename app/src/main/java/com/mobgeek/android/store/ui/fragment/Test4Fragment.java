@@ -17,6 +17,9 @@ import com.android.xjcommon.bus.Event;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
+/**
+ * @author chicunxiang
+ */
 public class Test4Fragment extends SupportFragmentImp {
     @SuppressLint("CheckResult")
     @Nullable

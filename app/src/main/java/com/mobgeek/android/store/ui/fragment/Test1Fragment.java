@@ -16,6 +16,9 @@ import com.android.xjdata.helper.SharedPreferencesHelper;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
+/**
+ * @author chicunxiang
+ */
 public class Test1Fragment extends SupportFragmentImp {
 
 

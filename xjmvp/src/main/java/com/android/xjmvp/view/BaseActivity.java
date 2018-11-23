@@ -29,7 +29,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
         mPresenter.attachView(this, this);
-        setContentView(R.layout.activity_base);
+        super.setContentView(R.layout.activity_base);
         initCenterView();
         initView();
     }
