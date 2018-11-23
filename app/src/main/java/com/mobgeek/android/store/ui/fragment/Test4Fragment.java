@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.xjcommon.base.SupportFragmentImp;
-import com.android.xjcommon.bus.Bus;
-import com.android.xjcommon.bus.BusSubscriptions;
+import com.android.xjcommon.bus.EventBus;
+import com.android.xjcommon.bus.EventBusSubscriptions;
 import com.android.xjcommon.bus.Event;
 
 import io.reactivex.functions.Consumer;
@@ -30,8 +30,8 @@ public class Test4Fragment extends SupportFragmentImp {
                 start(new Test3Fragment());
             }
         });
-        BusSubscriptions.bindAll(this,
-                Bus.get().subscribe(Event.class).map(new Function<Event, Event>() {
+        EventBusSubscriptions.bindAll(this,
+                EventBus.get().subscribe(Event.class).map(new Function<Event, Event>() {
                     @Override
                     public Event apply(Event o) throws Exception {
                         return o;
@@ -50,6 +50,6 @@ public class Test4Fragment extends SupportFragmentImp {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        BusSubscriptions.unbind(this);
+        EventBusSubscriptions.unbind(this);
     }
 }

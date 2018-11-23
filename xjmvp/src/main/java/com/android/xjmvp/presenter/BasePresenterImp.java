@@ -2,8 +2,8 @@ package com.android.xjmvp.presenter;
 
 import android.content.Context;
 
-import com.android.xjcommon.bus.Bus;
-import com.android.xjcommon.bus.BusSubscriptions;
+import com.android.xjcommon.bus.EventBus;
+import com.android.xjcommon.bus.EventBusSubscriptions;
 import com.android.xjcommon.utils.ToastUtil;
 import com.android.xjmvp.view.BaseView;
 
@@ -38,7 +38,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
 
     @Override
     public <T> Disposable createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
-        Disposable subscribe = Bus.get()
+        Disposable subscribe = EventBus.get()
                 .subscribe(clazz)
                 .filter(new Predicate<T>() {
                     @Override
@@ -53,7 +53,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
 
                     }
                 });
-        BusSubscriptions.bind(mView, subscribe);
+        EventBusSubscriptions.bind(mView, subscribe);
         return subscribe;
     }
 
@@ -74,6 +74,6 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
 
     @Override
     public void onDestroy() {
-        BusSubscriptions.unbind(mView);
+        EventBusSubscriptions.unbind(mView);
     }
 }

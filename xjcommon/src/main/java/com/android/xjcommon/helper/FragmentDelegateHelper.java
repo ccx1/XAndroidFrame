@@ -20,17 +20,17 @@ import static com.android.xjcommon.helper.TransactionDelegate.FRAGMENTATION_ARG_
  * @date 2018/11/15
  */
 public class FragmentDelegateHelper {
-    private final SupportFragment     mXjF;
+    private final SupportFragment     mSupportFragment;
     private final Fragment            mFragment;
     private       TransactionDelegate mTransactionDelegate;
     private       SupportActivity     mSupport;
     private       FragmentActivity    mActivity;
-    public        int                 mContainerId;
+    private       int                 mContainerId;
     private       Animation           mExitAnim;
     private       Animation           mEnterAnim;
 
     public FragmentDelegateHelper(SupportFragment fragment) {
-        this.mXjF = fragment;
+        this.mSupportFragment = fragment;
         this.mFragment = (Fragment) fragment;
     }
 

@@ -10,9 +10,9 @@ import com.android.xjcommon.BuildConfig;
 public class Logger {
 
 
-    public static void i(String TAG, String s) {
+    public static void i(String tag, String s) {
         if (BuildConfig.DEBUG) {
-            Log.i(TAG, s);
+            Log.i(tag, s);
         }
     }
 
@@ -22,9 +22,9 @@ public class Logger {
         }
     }
 
-    public static void w(String TAG, String s) {
+    public static void w(String tag, String s) {
         if (BuildConfig.DEBUG) {
-            Log.w(TAG, s);
+            Log.w(tag, s);
         }
     }
 
@@ -34,9 +34,9 @@ public class Logger {
         }
     }
 
-    public static void d(String TAG, String s) {
+    public static void d(String tag, String s) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, s);
+            Log.d(tag, s);
         }
     }
 
@@ -46,9 +46,9 @@ public class Logger {
         }
     }
 
-    public static void e(String TAG, String s) {
+    public static void e(String tag, String s) {
         if (BuildConfig.DEBUG) {
-            Log.e(TAG, s);
+            Log.e(tag, s);
         }
     }
 
@@ -58,9 +58,9 @@ public class Logger {
         }
     }
 
-    public static void v(String TAG, String s) {
+    public static void v(String tag, String s) {
         if (BuildConfig.DEBUG) {
-            Log.v(TAG, s);
+            Log.v(tag, s);
         }
     }
 

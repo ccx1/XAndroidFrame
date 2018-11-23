@@ -132,22 +132,27 @@ public class TransactionDelegate {
             return;
         }
         // 获取除了目标的栈上部fragment
-        final List<SupportFragment> willPopFragments = FragmentManager.getInstance().getWillPopFragments(supportFragmentManager, name, includeTargetFragment);
+        List<SupportFragment> willPopFragments = FragmentManager.getInstance().getWillPopFragments(supportFragmentManager, name, includeTargetFragment);
         if (willPopFragments.size() == 0) {
             return;
         }
 
-        Fragment   topFragment = (Fragment) willPopFragments.get(0);
-        final View container   = findContainerById(topFragment, getContainerId(topFragment));
+        Fragment topFragment = (Fragment) willPopFragments.get(0);
+        View     container   = findContainerById(topFragment, getContainerId(topFragment));
         if (container == null) {
             return;
         }
         // 得到需要关闭的fragment.进行安全关闭
-        final View fragmentView = topFragment.getView();
+        View fragmentView = topFragment.getView();
         if (fragmentView == null) {
             return;
         }
-        final Animation exitAnimation = support.getSupportDelegate().getExitAnimation();
+        Animation exitAnimation = support.getSupportDelegate().getExitAnimation();
+        run(supportFragmentManager, willPopFragments, container, fragmentView, exitAnimation);
+
+    }
+
+    private void run(final android.support.v4.app.FragmentManager supportFragmentManager, final List<SupportFragment> willPopFragments, final View container, final View fragmentView, final Animation exitAnimation) {
         Observable.just(container)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<View, ViewGroup>() {
@@ -206,7 +211,6 @@ public class TransactionDelegate {
 
                     }
                 });
-
     }
 
     /**
