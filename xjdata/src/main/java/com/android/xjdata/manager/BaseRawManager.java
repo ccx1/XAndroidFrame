@@ -14,8 +14,8 @@ import java.util.List;
  * @author ccx
  * @date 2018/11/16
  */
-public abstract class RawManager extends SQLiteOpenHelper {
-    public RawManager(Context context, String name, int version) {
+public abstract class BaseRawManager extends SQLiteOpenHelper {
+    public BaseRawManager(Context context, String name, int version) {
         super(context, name, null, version);
     }
 
@@ -51,7 +51,7 @@ public abstract class RawManager extends SQLiteOpenHelper {
      * | _id | value | create_time | last_update |
      */
     protected static class ValueColumn
-            extends RawManager.Column {
+            extends BaseRawManager.Column {
         static final String COLUMN_VALUE = "value";
 
         public static String createTableSQL(String tableName) {
@@ -71,7 +71,7 @@ public abstract class RawManager extends SQLiteOpenHelper {
      * | _id | name | value | create_time | last_update |
      */
     protected static class NameValueColumn
-            extends RawManager.ValueColumn {
+            extends BaseRawManager.ValueColumn {
         private static final String COLUMN_NAME = "name";
 
         public static String createTableSQL(String tableName) {
@@ -88,7 +88,7 @@ public abstract class RawManager extends SQLiteOpenHelper {
 
 
     public List<List<RawBasic>> getValues(String tableName, String... col) {
-        synchronized (RawManager.class) {
+        synchronized (BaseRawManager.class) {
             SQLiteDatabase db = getReadableDatabase();
             try {
                 List<List<RawBasic>> localMap = getRawColumns(db, tableName, col);
@@ -125,7 +125,12 @@ public abstract class RawManager extends SQLiteOpenHelper {
         return values;
     }
 
-    // 查询数量
+    /**
+     * 查询数量
+     * @param db
+     * @param tableName
+     * @return
+     */
     private int getRawCount(SQLiteDatabase db, String tableName) {
         Cursor cursor = null;
         try {
