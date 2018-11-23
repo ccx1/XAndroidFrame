@@ -19,9 +19,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     protected void initView() {
         Common.init(this);
         loadRootFragment(R.id.fl, new Test1Fragment());
-        BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
-        int            battery        = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        System.out.println("" + battery);
+
     }
 
 
