@@ -24,6 +24,11 @@ public abstract class RawManager extends SQLiteOpenHelper {
         reCreateTable(db, 0);
     }
 
+    /**
+     * 重新创建表
+     * @param db
+     * @param i
+     */
     public abstract void reCreateTable(SQLiteDatabase db, int i);
 
     @Override
