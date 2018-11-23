@@ -1,4 +1,4 @@
-package com.mobgeek.android.store;
+package com.android.group.sample;
 
 import android.annotation.TargetApi;
 import android.os.BatteryManager;
@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.android.common.common.Common;
 import com.android.mvp.view.BaseActivity;
-import com.mobgeek.android.store.ui.fragment.Test1Fragment;
+import com.android.group.sample.ui.fragment.Test1Fragment;
 
 /**
  * @author chicunxiang
@@ -18,7 +18,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     @Override
     protected void initView() {
         Common.init(this);
-        loadRootFragment(R.id.fl, new Test1Fragment());
+        loadRootFragment(com.mobgeek.android.store.R.id.fl, new Test1Fragment());
         BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
         int            battery        = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         System.out.println("" + battery);
@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     protected int contentLayoutId() {
-        return R.layout.activity_main;
+        return com.mobgeek.android.store.R.layout.activity_main;
     }
 
     @Override

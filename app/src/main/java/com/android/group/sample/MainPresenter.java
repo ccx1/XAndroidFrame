@@ -1,4 +1,4 @@
-package com.mobgeek.android.store;
+package com.android.group.sample;
 
 import com.android.mvp.presenter.BasePresenterImp;
 

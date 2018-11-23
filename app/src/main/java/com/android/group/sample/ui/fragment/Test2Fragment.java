@@ -1,4 +1,4 @@
-package com.mobgeek.android.store.ui.fragment;
+package com.android.group.sample.ui.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.android.common.action.AbstractAction1;
 import com.android.mvp.view.BaseFragment;
-import com.mobgeek.android.store.ui.presenter.Test2Presenter;
+import com.android.group.sample.ui.presenter.Test2Presenter;
 
 import io.reactivex.functions.Consumer;
 

@@ -1,4 +1,4 @@
-package com.mobgeek.android.store.ui.fragment;
+package com.android.group.sample.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

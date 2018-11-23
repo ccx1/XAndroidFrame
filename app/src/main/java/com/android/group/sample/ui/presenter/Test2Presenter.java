@@ -1,10 +1,10 @@
-package com.mobgeek.android.store.ui.presenter;
+package com.android.group.sample.ui.presenter;
 
 import com.android.http.callback.ResponseCallback;
 import com.android.http.model.ResultModel;
 import com.android.mvp.presenter.BasePresenterImp;
-import com.mobgeek.android.store.network.HttpHelper;
-import com.mobgeek.android.store.ui.fragment.Test2Fragment;
+import com.android.group.sample.network.HttpHelper;
+import com.android.group.sample.ui.fragment.Test2Fragment;
 
 /**
  * @author ccx

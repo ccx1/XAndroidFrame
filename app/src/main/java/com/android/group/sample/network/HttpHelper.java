@@ -1,4 +1,4 @@
-package com.mobgeek.android.store.network;
+package com.android.group.sample.network;
 
 import com.android.http.callback.ResponseCallback;
 import com.android.http.manager.HttpServiceManager;

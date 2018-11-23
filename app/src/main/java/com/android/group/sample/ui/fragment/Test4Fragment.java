@@ -1,4 +1,4 @@
-package com.mobgeek.android.store.ui.fragment;
+package com.android.group.sample.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
