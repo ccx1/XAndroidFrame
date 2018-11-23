@@ -33,7 +33,7 @@ rx框架系列-自用系列
 
 rxbus使用
 
-     Disposable subscribe = XjBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
+     Disposable subscribe = RxBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
          @Override
          public Object apply(Object o) {
              return o;
@@ -46,21 +46,21 @@ rxbus使用
      });
 
     // 需要注册bus
-     XjBusSubscriptions.bind(this, subscribe);
+     RxBusSubscriptions.bind(this, subscribe);
 
 销毁的时候需要注销bus
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        XjBusSubscriptions.unbind(this);
+        BusSubscriptions.unbind(this);
     }
 
 发送数据
 
-     XjBus.get().post(1234132413);
-     XjBus.get().post("asdfsdfad");
-     XjBus.get().post(new XjEvent<String>("test1", "afsdg"));
+     RxBus.get().post(1234132413);
+     RxBus.get().post("asdfsdfad");
+     RxBus.get().post(new Event<String>("test1", "afsdg"));
 
 ##### 如果使用mvp架构包，则可以省略注册步骤以及销毁步骤
 
@@ -112,7 +112,7 @@ suppoetactivityimp和supportfragmentimp
 
 rxpermission
 
-     mPermissionsHelper = new XjPermissionsHelper(this);
+     mPermissionsHelper = new PermissionsHelper(this);
      mPermissionsHelper
              .request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
              .subscribe(new Observer<Boolean>() {

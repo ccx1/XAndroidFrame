@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.common.base.SupportFragmentImp;
-import com.android.common.bus.EventBus;
-import com.android.common.bus.EventBusSubscriptions;
+import com.android.common.bus.RxBus;
+import com.android.common.bus.RxBusSubscriptions;
 import com.android.data.helper.SharedPreferencesHelper;
 
 import io.reactivex.functions.Consumer;
@@ -34,8 +34,8 @@ public class Test1Fragment extends SupportFragmentImp {
             }
         });
 
-        EventBusSubscriptions.bindAll(this,
-                EventBus.get().subscribe(String.class).map(new Function<Object, Object>() {
+        RxBusSubscriptions.bindAll(this,
+                RxBus.get().subscribe(String.class).map(new Function<Object, Object>() {
                     @Override
                     public Object apply(Object o) throws Exception {
                         return o;
@@ -46,7 +46,7 @@ public class Test1Fragment extends SupportFragmentImp {
                         System.out.println("我在1号界面收到了 " + o);
                     }
                 }),
-                EventBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
+                RxBus.get().subscribe(Integer.class).map(new Function<Object, Object>() {
                     @Override
                     public Object apply(Object o) throws Exception {
                         return o;
@@ -68,6 +68,6 @@ public class Test1Fragment extends SupportFragmentImp {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBusSubscriptions.unbind(this);
+        RxBusSubscriptions.unbind(this);
     }
 }

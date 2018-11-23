@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.common.base.SupportFragmentImp;
-import com.android.common.bus.EventBus;
-import com.android.common.bus.EventBusSubscriptions;
+import com.android.common.bus.RxBus;
+import com.android.common.bus.RxBusSubscriptions;
 import com.android.common.bus.Event;
 import com.android.data.helper.SharedPreferencesHelper;
 
@@ -27,9 +27,9 @@ public class Test3Fragment extends SupportFragmentImp {
             @Override
             public void onClick(View v) {
                 popTo(Test1Fragment.class);
-                EventBus.get().post(1234132413);
-                EventBus.get().post("asdfsdfad");
-                EventBus.get().post(new Event<String>("test1", "afsdg"));
+                RxBus.get().post(1234132413);
+                RxBus.get().post("asdfsdfad");
+                RxBus.get().post(new Event<String>("test1", "afsdg"));
             }
         });
 
@@ -39,6 +39,6 @@ public class Test3Fragment extends SupportFragmentImp {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBusSubscriptions.unbind(this);
+        RxBusSubscriptions.unbind(this);
     }
 }

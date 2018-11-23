@@ -11,21 +11,21 @@ import io.reactivex.processors.PublishProcessor;
  * @author ccx
  * @date 2018/11/16
  */
-public class EventBus {
+public class RxBus {
 
-    private static EventBus                  sBus;
+    private static RxBus                     sBus;
     private final  FlowableProcessor<Object> mProcessor;
     private static List<Object>              subscribeTask = new ArrayList<>();
 
-    private EventBus() {
+    private RxBus() {
         mProcessor = PublishProcessor.create().toSerialized();
     }
 
-    public static EventBus get() {
+    public static RxBus get() {
         if (sBus == null) {
-            synchronized (EventBus.class) {
+            synchronized (RxBus.class) {
                 if (sBus == null) {
-                    sBus = new EventBus();
+                    sBus = new RxBus();
                 }
             }
         }
