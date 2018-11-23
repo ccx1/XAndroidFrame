@@ -35,6 +35,9 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
     public void retry() {
     }
 
+    @Override
+    public void setData(Object o) {
+    }
 
     @Override
     public <T> void createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
@@ -50,7 +53,8 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
                 .subscribe(action, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        // 统一上报处理
+                        showToast(throwable.toString());
                     }
                 });
         EventBusSubscriptions.bind(mView, subscribe);

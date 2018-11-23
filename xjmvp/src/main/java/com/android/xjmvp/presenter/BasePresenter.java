@@ -33,6 +33,12 @@ public interface BasePresenter<V extends BaseView> {
     void setData();
 
     /**
+     * 带参数的请求数据，用于上个接口返回才需要请求下个接口时所用
+     * @param o
+     */
+    void setData(Object o);
+
+    /**
      * 重试，尝试重新连接，请求数据等等
      */
     void retry();
