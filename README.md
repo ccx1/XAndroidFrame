@@ -10,9 +10,12 @@
 
 4. mvp  mvp设计模式框架包，如果需要mvp设计模式，需要集成，依托于common。
 
+
 ### 下一计划
 
 1. 数据加密层
+
+2. adapter 适配器 ，常用的模式适配器开发
 
 ### 目标
 
@@ -25,6 +28,8 @@ data 数据架构包，非必要
 http 网络请求包，非必要
 
 mvp  mvp设计模式框架包，如果需要mvp设计模式，需要集成，依托于common。
+
+adapter viewpage和recycleview的适配器框架包
 
 <hr/>
 
