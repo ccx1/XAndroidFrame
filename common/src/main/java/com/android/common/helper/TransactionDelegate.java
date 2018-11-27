@@ -237,7 +237,9 @@ public class TransactionDelegate {
     }
 
     private ViewGroup findContainerById(Fragment fragment, int containerId) {
-        if (fragment.getView() == null) return null;
+        if (fragment.getView() == null) {
+            return null;
+        }
 
         View     container;
         Fragment parentFragment = fragment.getParentFragment();

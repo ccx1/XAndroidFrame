@@ -67,8 +67,9 @@ public class CameraHelper {
             photos.add(new Photo(new String(data, 0, data.length - 1), desc));
         }
         // 关闭
-        if (cursor != null)
+        if (cursor != null) {
             cursor.close();
+        }
         return new ArrayList<>(photos);
     }
 
@@ -81,6 +82,8 @@ public class CameraHelper {
                 }
                 // 将照片发送到系统相册
                 activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                break;
+            default:
                 break;
         }
     }
