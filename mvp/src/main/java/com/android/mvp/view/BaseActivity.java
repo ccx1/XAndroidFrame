@@ -1,9 +1,10 @@
 package com.android.mvp.view;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.common.action.AbstractAction1;
 import com.android.common.base.SupportActivityImp;
@@ -18,17 +19,19 @@ import com.android.mvp.widget.StatusLayout;
  */
 public abstract class BaseActivity<P extends BasePresenter> extends SupportActivityImp implements BaseView {
 
-    private              P                 mPresenter;
-    private              PermissionsHelper mPermissionsHelper;
-    private              StatusLayout      mStatusLayout;
-    private static final int               DEFAULT_BASE_CONTENT_ID = 100092;
+    public P mPresenter;
+    private PermissionsHelper mPermissionsHelper;
+    private StatusLayout mStatusLayout;
+    private static final int DEFAULT_BASE_CONTENT_ID = 100092;
 
     @Override
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = initPresenter();
-        mPresenter.attachView(this, this);
+        if (mPresenter != null) {
+            mPresenter.attachView(this, this);
+        }
         super.setContentView(R.layout.activity_base);
         initCenterView();
         initView();
@@ -50,19 +53,23 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         mStatusLayout.setRetryOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.retry();
+                if (mPresenter != null) {
+                    mPresenter.retry();
+                }
             }
         });
     }
 
     /**
      * 返回一个view的容器
+     *
      * @return
      */
     protected abstract View contentLayout();
 
     /**
      * 返回一个view的id
+     *
      * @return
      */
     protected abstract int contentLayoutId();
@@ -82,6 +89,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
 
     /**
      * 初始化P层
+     *
      * @return
      */
     public abstract P initPresenter();
@@ -114,6 +122,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
     }
 
     @Override
@@ -123,12 +134,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
             mPermissionsHelper = new PermissionsHelper(this);
         }
         mPermissionsHelper
-                .request(permissions)
-                .subscribe(action1);
+            .request(permissions)
+            .subscribe(action1);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+        @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 防止没有请求权限直接setResult，导致程序崩溃
         if (mPermissionsHelper != null) {

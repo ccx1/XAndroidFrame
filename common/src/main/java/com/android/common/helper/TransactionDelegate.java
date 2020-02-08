@@ -2,12 +2,13 @@ package com.android.common.helper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.common.base.SupportActivity;
 import com.android.common.base.SupportFragment;
@@ -30,27 +31,31 @@ import io.reactivex.schedulers.Schedulers;
 public class TransactionDelegate {
 
 
-    static final  String           FRAGMENTATION_ARG_CONTAINER = "fragmentation_arg_container";
-    private final SupportActivity  support;
+    static final String FRAGMENTATION_ARG_CONTAINER = "fragmentation_arg_container";
+    private final SupportActivity support;
     private final FragmentActivity mActivity;
 
 
-    public TransactionDelegate(SupportActivity xjSupportActivity) {
-        this.support = xjSupportActivity;
+    public TransactionDelegate(SupportActivity supportActivity) {
+        this.support = supportActivity;
         this.mActivity = (FragmentActivity) support;
     }
 
     @SuppressLint("CheckResult")
-    public void dispatchStartTransaction(final android.support.v4.app.FragmentManager fragmentManager, final SupportFragment fragment) {
+    public void dispatchStartTransaction(final androidx.fragment.app.FragmentManager fragmentManager, final SupportFragment fragment, final boolean closeCurrent) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
                 SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
-                int             anInt       = getContainerId((Fragment) topFragment);
+                int anInt = getContainerId((Fragment) topFragment);
                 fragmentManager.beginTransaction().add(anInt, (Fragment) fragment).commit();
                 // 每一级都需要存储容器值
                 bindContainerId(anInt, fragment);
                 FragmentManager.getInstance().pushOneFragment(fragment);
+                if (closeCurrent) {
+                    fragmentManager.beginTransaction().remove((Fragment) topFragment).commit();
+                    FragmentManager.getInstance().PopOneFragment(topFragment);
+                }
             }
         });
     }
@@ -62,7 +67,7 @@ public class TransactionDelegate {
     }
 
     @SuppressLint("CheckResult")
-    public void loadRootTransaction(final android.support.v4.app.FragmentManager supportFragmentManager, final int containerId, final SupportFragment tofragment, final String name) {
+    public void loadRootTransaction(final androidx.fragment.app.FragmentManager supportFragmentManager, final int containerId, final SupportFragment tofragment, final String name) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +101,7 @@ public class TransactionDelegate {
 
 
     @SuppressLint("CheckResult")
-    public void pop(final android.support.v4.app.FragmentManager fragmentManager) {
+    public void pop(final androidx.fragment.app.FragmentManager fragmentManager) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
@@ -112,7 +117,7 @@ public class TransactionDelegate {
     }
 
 
-    public void popTo(final Class<?> targetFragment, final boolean includeTargetFragment, final android.support.v4.app.FragmentManager supportFragmentManager) {
+    public void popTo(final Class<?> targetFragment, final boolean includeTargetFragment, final androidx.fragment.app.FragmentManager supportFragmentManager) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
@@ -122,8 +127,9 @@ public class TransactionDelegate {
         });
     }
 
+
     @SuppressLint("CheckResult")
-    private void safePopTo(String name, boolean includeTargetFragment, final android.support.v4.app.FragmentManager supportFragmentManager) {
+    private void safePopTo(String name, boolean includeTargetFragment, final androidx.fragment.app.FragmentManager supportFragmentManager) {
         if (supportFragmentManager == null) {
             return;
         }
@@ -138,7 +144,7 @@ public class TransactionDelegate {
         }
 
         Fragment topFragment = (Fragment) willPopFragments.get(0);
-        View     container   = findContainerById(topFragment, getContainerId(topFragment));
+        View container = findContainerById(topFragment, getContainerId(topFragment));
         if (container == null) {
             return;
         }
@@ -152,7 +158,7 @@ public class TransactionDelegate {
 
     }
 
-    private void run(final android.support.v4.app.FragmentManager supportFragmentManager, final List<SupportFragment> willPopFragments, final View container, final View fragmentView, final Animation exitAnimation) {
+    private void run(final androidx.fragment.app.FragmentManager supportFragmentManager, final List<SupportFragment> willPopFragments, final View container, final View fragmentView, final Animation exitAnimation) {
         Observable.just(container)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<View, ViewGroup>() {
@@ -241,7 +247,7 @@ public class TransactionDelegate {
             return null;
         }
 
-        View     container;
+        View container;
         Fragment parentFragment = fragment.getParentFragment();
         if (parentFragment != null) {
             if (parentFragment.getView() != null) {
@@ -275,4 +281,6 @@ public class TransactionDelegate {
         }
         support.onSupportBackPressed();
     }
+
+
 }

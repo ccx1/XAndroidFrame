@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
+
+import androidx.core.content.FileProvider;
 
 import com.android.data.model.Photo;
 
@@ -24,6 +25,7 @@ public class CameraHelper {
 
 
     public static final int SYSTEM_CAMERA_RESULT = 10101;
+    public static final int SYSTEM_PHOTO_RESULT = 10102;
 
     private static CameraHelper sCameraHelper;
 
@@ -46,6 +48,12 @@ public class CameraHelper {
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         activity.startActivityForResult(intent, SYSTEM_CAMERA_RESULT);
+    }
+
+    public void startSystemPhotoSelect(Activity activity) {
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        activity.startActivityForResult(intent, SYSTEM_PHOTO_RESULT);
     }
 
     public List<Photo> getPhotosData(Activity activity) {
@@ -73,6 +81,7 @@ public class CameraHelper {
         return new ArrayList<>(photos);
     }
 
+
     public void onActivityResult(Activity activity, File file, int requestCode, Intent data) {
         switch (requestCode) {
             case SYSTEM_CAMERA_RESULT:
@@ -82,10 +91,39 @@ public class CameraHelper {
                 }
                 // 将照片发送到系统相册
                 activity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                if (mOnResultCallback != null) {
+                    mOnResultCallback.onCameraResult(file);
+                }
+
+                break;
+            case SYSTEM_PHOTO_RESULT:
+                if (data != null) {
+                    // 得到图片的全路径
+                    Uri uri = data.getData();
+                    if (uri != null && uri.getPath() != null) {
+                        File photo = new File(uri.getPath().replace("/raw/", ""));
+                        if (mOnResultCallback != null) {
+                            mOnResultCallback.onPhotoResult(file);
+                        }
+                    }
+                }
                 break;
             default:
                 break;
         }
+    }
+
+
+    private OnResultCallback mOnResultCallback;
+
+    public void setOnResultCallback(OnResultCallback onResultCallback) {
+        mOnResultCallback = onResultCallback;
+    }
+
+    public interface OnResultCallback {
+        void onCameraResult(File file);
+
+        void onPhotoResult(File file);
     }
 
 }

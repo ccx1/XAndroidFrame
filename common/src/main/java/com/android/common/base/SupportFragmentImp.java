@@ -3,14 +3,15 @@ package com.android.common.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.common.helper.FragmentDelegateHelper;
 
@@ -20,8 +21,8 @@ import com.android.common.helper.FragmentDelegateHelper;
  */
 public class SupportFragmentImp extends Fragment implements SupportFragment {
 
-    public  FragmentActivity       mActivity;
-    private FragmentDelegateHelper mXJFragmentDelegateHelper = new FragmentDelegateHelper(this);
+    public FragmentActivity mActivity;
+    private FragmentDelegateHelper mFragmentDelegateHelper = new FragmentDelegateHelper(this);
 
     @Override
     public void onAttach(Context context) {
@@ -33,32 +34,30 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         Animation animation = null;
         if (enter) {
-            animation = mXJFragmentDelegateHelper.getEnterAnimation();
+            animation = mFragmentDelegateHelper.getEnterAnimation();
         } else {
-            animation = mXJFragmentDelegateHelper.getExitAnimation();
+            animation = mFragmentDelegateHelper.getExitAnimation();
         }
         return animation;
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mXJFragmentDelegateHelper.onAttach(activity);
+        mFragmentDelegateHelper.onAttach(activity);
     }
-
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mXJFragmentDelegateHelper.onCreate(savedInstanceState);
+        mFragmentDelegateHelper.onCreate(savedInstanceState);
 
     }
 
@@ -73,7 +72,7 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     }
 
     public void pop() {
-        mXJFragmentDelegateHelper.pop();
+        mFragmentDelegateHelper.pop();
     }
 
     public void popTo(Class<?> clazz) {
@@ -81,18 +80,21 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     }
 
     public void popTo(Class<?> clazz, boolean includeTargetFragment) {
-        mXJFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
+        mFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
     }
 
     public void start(SupportFragmentImp fragment) {
-        mXJFragmentDelegateHelper.start(fragment);
+        mFragmentDelegateHelper.start(fragment);
+    }
+
+    public void start(SupportFragmentImp fragment,boolean closeCurrent) {
+        mFragmentDelegateHelper.start(fragment,closeCurrent);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 
     /**
      * 返回false 则不消费此事件，如果返回true，则消费此事件

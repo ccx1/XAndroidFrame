@@ -2,11 +2,12 @@ package com.android.common.helper;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.common.R;
 import com.android.common.base.SupportActivity;
@@ -20,18 +21,22 @@ import static com.android.common.helper.TransactionDelegate.FRAGMENTATION_ARG_CO
  * @date 2018/11/15
  */
 public class FragmentDelegateHelper {
-    private final SupportFragment     mSupportFragment;
-    private final Fragment            mFragment;
-    private       TransactionDelegate mTransactionDelegate;
-    private       SupportActivity     mSupport;
-    private       FragmentActivity    mActivity;
-    private       int                 mContainerId;
-    private       Animation           mExitAnim;
-    private       Animation           mEnterAnim;
+    private final SupportFragment mSupportFragment;
+    private final Fragment mFragment;
+    private TransactionDelegate mTransactionDelegate;
+    private SupportActivity mSupport;
+    private FragmentActivity mActivity;
+    private int mContainerId;
+    private Animation mExitAnim;
+    private Animation mEnterAnim;
 
     public FragmentDelegateHelper(SupportFragment fragment) {
         this.mSupportFragment = fragment;
         this.mFragment = (Fragment) fragment;
+    }
+
+    public void start(SupportFragmentImp fragment, boolean closeCurrent) {
+        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, closeCurrent);
     }
 
     /**
@@ -40,7 +45,7 @@ public class FragmentDelegateHelper {
      * @param fragment
      */
     public void start(SupportFragmentImp fragment) {
-        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment);
+        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, false);
     }
 
     private FragmentManager getFragmentManager() {
@@ -114,4 +119,6 @@ public class FragmentDelegateHelper {
             mFragment.onSaveInstanceState(arguments);
         }
     }
+
+
 }

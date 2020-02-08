@@ -1,6 +1,9 @@
 package com.android.http.interceptors;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -26,6 +29,7 @@ public class LoggerInterceptor implements Interceptor {
         i(logger, TAG, "----------请求地址 : " + request.url() + " ");
         i(logger, TAG, "----------请求头 : " + request.headers() + " ");
         i(logger, TAG, "----------请求方式 : " + request.method() + " ");
+        i(logger, TAG, "----------请求的body : " +new Gson().toJson(request.body()) + " ");
         Response response = chain.proceed(request);
         long     endTime  = System.currentTimeMillis();
         long     duration = endTime - startTime;

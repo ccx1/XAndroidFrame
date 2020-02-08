@@ -21,16 +21,16 @@ public class SharedPreferencesHelper {
 
     @SuppressLint("StaticFieldLeak")
     private static SharedPreferencesHelper                        sSharedPreferences;
-    private static SharedPreferences              sXj_config;
+    private static SharedPreferences config;
     private static Context                                        sApplicationContext;
     private        Map<String, SharedPreferences> mPreferencesMap = new HashMap<>();
 
     private SharedPreferencesHelper() {
     }
 
-    static void init(Context context) {
+    public static void init(Context context) {
         sApplicationContext = context.getApplicationContext();
-        sXj_config = sApplicationContext.getSharedPreferences("xj_config", Context.MODE_PRIVATE);
+        config = sApplicationContext.getSharedPreferences("config", Context.MODE_PRIVATE);
     }
 
     public static SharedPreferencesHelper getInstance() {
@@ -66,12 +66,12 @@ public class SharedPreferencesHelper {
     }
 
     public Object get(String key) {
-        Map<String, ?> all = sXj_config.getAll();
+        Map<String, ?> all = config.getAll();
         return all.get(key);
     }
 
     private SharedPreferences.Editor edit() {
-        return sXj_config.edit();
+        return config.edit();
     }
 
 

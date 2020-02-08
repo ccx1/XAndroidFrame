@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "dependencies.gradle"
 
 buildscript {
 
@@ -7,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -25,17 +26,3 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    compileSdkVersion = 28
-    buildToolsVersion = "28.0.3"
-    minSdkVersion = 19
-    targetSdkVersion = compileSdkVersion
-
-    v4Version = "28.0.0"
-    supportVersion = "28.0.0"
-    versionCode = 1
-    versionName = "1.0"
-
-    rxVersion = "2.2.3"
-    rxAndroidVersion = "2.1.0"
-}

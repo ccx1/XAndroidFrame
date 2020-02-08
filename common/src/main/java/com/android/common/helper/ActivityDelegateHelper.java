@@ -1,10 +1,11 @@
 package com.android.common.helper;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.common.R;
 import com.android.common.base.SupportActivity;
@@ -17,12 +18,12 @@ import com.android.common.base.SupportFragmentImp;
  */
 public class ActivityDelegateHelper {
 
-    private final SupportActivity  mSupportActivity;
+    private final SupportActivity mSupportActivity;
     private final FragmentActivity mActivity;
 
-    private TransactionDelegate mXjTransactionDelegate;
-    private Animation           mExitAnim;
-    private Animation           mEnterAnim;
+    private TransactionDelegate mTransactionDelegate;
+    private Animation mExitAnim;
+    private Animation mEnterAnim;
 
     public ActivityDelegateHelper(SupportActivity supportActivity) {
         if (supportActivity == null) {
@@ -39,7 +40,7 @@ public class ActivityDelegateHelper {
     }
 
     private void loadRootTransaction(FragmentManager supportFragmentManager, int containerId, SupportFragment tofragment, String name) {
-        mXjTransactionDelegate.loadRootTransaction(supportFragmentManager, containerId, tofragment, name);
+        mTransactionDelegate.loadRootTransaction(supportFragmentManager, containerId, tofragment, name);
     }
 
     private FragmentManager getSupportFragmentManager() {
@@ -51,19 +52,19 @@ public class ActivityDelegateHelper {
     }
 
     private void start(FragmentManager fragmentManager, SupportFragment tofragment) {
-        mXjTransactionDelegate.dispatchStartTransaction(fragmentManager, tofragment);
+        mTransactionDelegate.dispatchStartTransaction(fragmentManager, tofragment, false);
     }
 
     public void pop() {
-        mXjTransactionDelegate.pop(getSupportFragmentManager());
+        mTransactionDelegate.pop(getSupportFragmentManager());
     }
 
 
     public TransactionDelegate getTransactionDelegate() {
-        if (mXjTransactionDelegate == null) {
-            mXjTransactionDelegate = new TransactionDelegate(mSupportActivity);
+        if (mTransactionDelegate == null) {
+            mTransactionDelegate = new TransactionDelegate(mSupportActivity);
         }
-        return mXjTransactionDelegate;
+        return mTransactionDelegate;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class ActivityDelegateHelper {
      * @param targetFragment 回到目标fragment
      */
     public void popTo(Class<? extends SupportFragment> targetFragment, boolean includeTargetFragment) {
-        mXjTransactionDelegate.popTo(targetFragment, includeTargetFragment, getSupportFragmentManager());
+        mTransactionDelegate.popTo(targetFragment, includeTargetFragment, getSupportFragmentManager());
     }
 
     public Animation getExitAnimation() {
@@ -104,7 +105,7 @@ public class ActivityDelegateHelper {
     }
 
     public void onBackPressed() {
-        mXjTransactionDelegate.dispatchBackPressedEvent();
+        mTransactionDelegate.dispatchBackPressedEvent();
     }
 
 

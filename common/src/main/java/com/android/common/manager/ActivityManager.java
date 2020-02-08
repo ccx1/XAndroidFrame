@@ -10,29 +10,29 @@ import java.util.List;
  */
 public class ActivityManager {
 
-    private static ActivityManager sXjAcitivtyManager;
-    private        List<Activity>  mActivitieTask = new ArrayList<>();
+    private static ActivityManager sActivityManager;
+    private List<Activity> mActivitiesTask = new ArrayList<>();
 
     private ActivityManager() {
     }
 
     public static ActivityManager getInstance() {
-        if (sXjAcitivtyManager == null) {
-            sXjAcitivtyManager = new ActivityManager();
+        if (sActivityManager == null) {
+            sActivityManager = new ActivityManager();
         }
-        return sXjAcitivtyManager;
+        return sActivityManager;
     }
 
 
     public void pushOnActivity(Activity activity) {
         // 需要将其放到栈顶
-        mActivitieTask.add(0, activity);
+        mActivitiesTask.add(0, activity);
     }
 
     public void popOneActivity(Activity activity) {
         // 删除当前的.并且关闭
-        if (mActivitieTask.contains(activity)) {
-            mActivitieTask.remove(activity);
+        if (mActivitiesTask.contains(activity)) {
+            mActivitiesTask.remove(activity);
             // 如果已经关闭，则只用删除，不用执行关闭
             if (activity.isFinishing()) {
                 activity.finish();
@@ -43,19 +43,19 @@ public class ActivityManager {
 
     public Activity getTaskTopActivity() {
         Activity activity = null;
-        if (mActivitieTask.size() != 0) {
-            activity = mActivitieTask.get(0);
+        if (mActivitiesTask.size() != 0) {
+            activity = mActivitiesTask.get(0);
         }
         return activity;
     }
 
 
     public int getTaskActivitySize() {
-        return mActivitieTask.size();
+        return mActivitiesTask.size();
     }
 
     public void finishAllActivity() {
-        for (Activity activity : mActivitieTask) {
+        for (Activity activity : mActivitiesTask) {
             popOneActivity(activity);
         }
     }

@@ -1,6 +1,7 @@
 package com.android.common.base;
 
-import android.support.annotation.IdRes;
+
+import androidx.annotation.IdRes;
 
 import com.android.common.helper.ActivityDelegateHelper;
 

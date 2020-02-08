@@ -1,9 +1,10 @@
 package com.android.common.base;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.common.helper.ActivityDelegateHelper;
 
@@ -11,47 +12,53 @@ import com.android.common.helper.ActivityDelegateHelper;
  * @author chicunxiang
  */
 public class SupportActivityImp extends AppCompatActivity implements SupportActivity {
-    private ActivityDelegateHelper mXjActivityDelegateHelper = new ActivityDelegateHelper(this);
+    private ActivityDelegateHelper mActivityDelegateHelper = new ActivityDelegateHelper(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mXjActivityDelegateHelper.onCreate(savedInstanceState);
+        mActivityDelegateHelper.onCreate(savedInstanceState);
     }
 
 
     public void start(SupportFragmentImp fragment) {
-        mXjActivityDelegateHelper.start(fragment);
+        mActivityDelegateHelper.start(fragment);
     }
 
     public void pop() {
-        mXjActivityDelegateHelper.pop();
+        mActivityDelegateHelper.pop();
     }
 
-
+    /**
+     * 关闭至某一个fragment
+     * @param targetFragment 目标
+     */
     public void popTo(Class<? extends SupportFragment> targetFragment) {
-        mXjActivityDelegateHelper.popTo(targetFragment);
+        mActivityDelegateHelper.popTo(targetFragment);
     }
 
     @Override
     public void loadRootFragment(@IdRes int containerId, SupportFragment fragment) {
-        mXjActivityDelegateHelper.loadRootFragment(containerId, fragment);
+        mActivityDelegateHelper.loadRootFragment(containerId, fragment);
     }
 
     @Override
     public ActivityDelegateHelper getSupportDelegate() {
-        return mXjActivityDelegateHelper;
+        return mActivityDelegateHelper;
     }
 
 
     /**
-     * 监听返回键事件
+     * 监听返回键事件,此方法不做重写
      */
     @Override
     public void onBackPressed() {
-        mXjActivityDelegateHelper.onBackPressed();
+        mActivityDelegateHelper.onBackPressed();
     }
 
+    /**
+     * 监听返回键，可重写此方法
+     */
     @Override
     public void onSupportBackPressed() {
     }

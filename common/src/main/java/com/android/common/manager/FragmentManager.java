@@ -1,11 +1,11 @@
 package com.android.common.manager;
 
-import android.support.v4.app.Fragment;
-
-import com.android.common.base.SupportFragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.android.common.base.SupportFragment;
 
 
 /**
@@ -25,12 +25,20 @@ public class FragmentManager {
         return sFragmentManager;
     }
 
+    /**
+     * 添加一个fragment
+     * @param f
+     */
     public void pushOneFragment(SupportFragment f) {
         if (f != null && !task.contains(f)) {
             task.add(0, f);
         }
     }
 
+    /**
+     * 移除一个fragment
+     * @param f
+     */
     public void PopOneFragment(SupportFragment f) {
         if (task.contains(f)) {
             task.remove(f);
@@ -42,6 +50,9 @@ public class FragmentManager {
         return task.size();
     }
 
+    /**
+     * 获取顶部fragment
+     */
     public SupportFragment getTopFragment() {
         SupportFragment fragment = null;
         if (task.size() != 0) {
@@ -50,9 +61,8 @@ public class FragmentManager {
         return fragment;
     }
 
-    public List<SupportFragment> getWillPopFragments(android.support.v4.app.FragmentManager supportFragmentManager, String tag, boolean includeTargetFragment) {
+    public List<SupportFragment> getWillPopFragments(androidx.fragment.app.FragmentManager supportFragmentManager, String tag, boolean includeTargetFragment) {
         Fragment targetFragment = supportFragmentManager.findFragmentByTag(tag);
-
         List<SupportFragment> list = new ArrayList<>();
         if (targetFragment == null) {
             return list;

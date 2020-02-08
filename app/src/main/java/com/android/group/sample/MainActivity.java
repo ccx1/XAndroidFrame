@@ -1,7 +1,6 @@
 package com.android.group.sample;
 
 import android.annotation.TargetApi;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.view.View;
 
