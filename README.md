@@ -13,9 +13,10 @@
 
 ### 下一计划
 
-1. 数据加密层
+1. 数据加密层 encode
 
-2. adapter 适配器 ，常用的模式适配器开发
+2. 数据库处理层 dataServer
+
 
 ### 目标
 
@@ -29,7 +30,11 @@ http 网络请求包，非必要
 
 mvp  mvp设计模式框架包，如果需要mvp设计模式，需要集成，依托于common。
 
-adapter viewpage和recycleview的适配器框架包
+encode 数据加密层，非必要
+
+dataServer 数据库处理层，非必要，如果需要数据库可以添加
+
+
 
 <hr/>
 
@@ -103,7 +108,7 @@ suppoetactivityimp和supportfragmentimp
 
 
     参数1：某个fragment的class
-    参数2：是否包含
+    参数2：是否包含当前
     public void popTo(Class<?> clazz, boolean includeTargetFragment)
 
 
@@ -252,7 +257,7 @@ GlideManager
 
 CameraHelper
 
-    // 获取系统照相机
+    // 获取系统照相机，通过onActivityResult返回
     public void startSystemCamera(Activity activity, File file)
 
     // 拍摄完成之后回传将照片放入相册
@@ -260,6 +265,12 @@ CameraHelper
 
     // 获取照片数据
     public List<Photo> getPhotosData(Activity activity)
+    
+    // 跳转系统的图片选择，通过onActivityResult返回
+    public void startSystemPhotoSelect(Activity activity)
+    
+    // 设置结果回调
+    public void setOnResultCallback(OnResultCallback onResultCallback)
 
 FileHelper
 
