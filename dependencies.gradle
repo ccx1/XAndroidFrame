@@ -17,13 +17,7 @@ project.ext {
             "butterknife"         : "com.jakewharton:butterknife:${butterknifeVersion}",
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
             "recyclerview"        : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
-            "autosize"            : "me.jessyan:autosize:1.2.0",
             "gson"                : "com.google.code.gson:gson:2.8.6",
-            "xrecyclerview"       : "com.jcodecraeer:xrecyclerview:1.6.0",
-            "constraintlayout"    : "androidx.constraintlayout:constraintlayout:1.1.3",
-            "iot-linkkit"         : "com.aliyun.alink.linksdk:iot-linkkit:1.6.6",
-            "breeze"              : "com.aliyun.alink.linksdk:breeze:1.2.3",
-            "breeze-biz"          : "com.aliyun.alink.linksdk:breeze-biz:1.1.0",
-            "breeze-ota"          : "com.aliyun.alink.linksdk:breeze-ota:1.2.1"
+            "constraintlayout"    : "androidx.constraintlayout:constraintlayout:1.1.3"
     ]
 }
