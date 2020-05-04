@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 
-
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -19,8 +18,8 @@ import java.util.Map;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 /**
@@ -165,7 +164,7 @@ public class PermissionsHelper {
         if (requestCode != PERMISSIONS_REQUEST_CODE) {
             return;
         }
-        Schedulers.io().createWorker().schedule(new Runnable() {
+        AndroidSchedulers.mainThread().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < permissions.length; i++) {

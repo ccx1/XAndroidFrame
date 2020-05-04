@@ -82,7 +82,7 @@ public class FragmentDelegateHelper {
 
     public Animation getExitAnimation() {
         if (mExitAnim == null) {
-            mExitAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_fragment_exit);
+            mExitAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_right_fragment_exit);
         }
 
         return mExitAnim;
@@ -90,7 +90,7 @@ public class FragmentDelegateHelper {
 
     public Animation getEnterAnimation() {
         if (mEnterAnim == null) {
-            mEnterAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_fragment_enter);
+            mEnterAnim = AnimationUtils.loadAnimation(mActivity.getApplicationContext(), R.anim.anim_right_fragment_enter);
         }
         return mEnterAnim;
     }

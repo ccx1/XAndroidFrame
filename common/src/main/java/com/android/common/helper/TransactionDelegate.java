@@ -48,7 +48,7 @@ public class TransactionDelegate {
             public void run() {
                 SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
                 int anInt = getContainerId((Fragment) topFragment);
-                fragmentManager.beginTransaction().add(anInt, (Fragment) fragment).commit();
+                fragmentManager.beginTransaction().add(anInt, (Fragment) fragment, fragment.getClass().getName()).commit();
                 // 每一级都需要存储容器值
                 bindContainerId(anInt, fragment);
                 FragmentManager.getInstance().pushOneFragment(fragment);
