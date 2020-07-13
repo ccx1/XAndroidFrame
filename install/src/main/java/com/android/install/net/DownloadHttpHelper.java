@@ -14,13 +14,6 @@ import okhttp3.ResponseBody;
  */
 public class DownloadHttpHelper {
 
-//
-//    static {
-//        RetrofitManager.getInstance().setBaseUrl("http://api.ccx1.top")
-//                .setOkHttpClient(OkHttpManager.getInstance().build());
-//    }
-
-
     public static void downloadFile(String path, String apkSavePath, FileDownLoadCallback<ResponseBody> callback){
         Observable<ResponseBody> observable = RetrofitManager.getInstance().getRetrofit().create(DownloadService.class).downloadFile(path);
         HttpServiceManager.getInstance().downloadFile(apkSavePath,observable,callback);

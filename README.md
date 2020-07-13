@@ -1,5 +1,7 @@
 # FrameGroup
 
+<img src="./img/xmind.png"/>
+
 ### 目前完成
 
 1. data 数据处理层
