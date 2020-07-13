@@ -17,7 +17,7 @@ import com.android.mvp.widget.StatusLayout;
  * @author ccx
  * @date 2018/11/22
  */
-public abstract class BaseActivity<P extends BasePresenter> extends SupportActivityImp implements BaseView {
+public abstract class BaseActivity<P extends BasePresenter> extends SupportActivityImp implements BaseView<P> {
 
     public P mPresenter;
     private PermissionsHelper mPermissionsHelper;
@@ -92,6 +92,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
      *
      * @return
      */
+    @Override
     public abstract P initPresenter();
 
     @Override

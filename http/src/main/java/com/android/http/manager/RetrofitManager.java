@@ -14,9 +14,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager {
 
     private static RetrofitManager sRetrofitManager;
-    private        String          mBaseUrl;
+    private String mBaseUrl;
     private Retrofit retrofit;
-    private OkHttpClient mOkHttpClient = new OkHttpClient();
+    private OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
+            .build();
 
     private RetrofitManager() {
     }
@@ -37,14 +38,14 @@ public class RetrofitManager {
         return mBaseUrl;
     }
 
-    public void setOkHttpClient(OkHttpClient okHttpClient){
+    public void setOkHttpClient(OkHttpClient okHttpClient) {
         this.mOkHttpClient = okHttpClient;
         build();
     }
 
     public void build() {
         if (mBaseUrl == null) {
-            new IllegalAccessException("need setBaseUrl");
+            throw new RuntimeException("need setBaseUrl");
         }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .serializeNulls()

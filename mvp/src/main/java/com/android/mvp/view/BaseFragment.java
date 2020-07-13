@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -16,14 +17,16 @@ import com.android.mvp.R;
 import com.android.mvp.presenter.BasePresenter;
 import com.android.mvp.widget.StatusLayout;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * @author ccx
  * @date 2018/11/21
  */
-public abstract class BaseFragment<P extends BasePresenter> extends SupportFragmentImp implements BaseView {
+public abstract class BaseFragment<P extends BasePresenter> extends SupportFragmentImp implements BaseView<P> {
 
-    public  P                 mPresenter;
-    private StatusLayout      mStatusLayout;
+    public P mPresenter;
+    private StatusLayout mStatusLayout;
     private PermissionsHelper mPermissionsHelper;
 
     @Override
@@ -69,18 +72,21 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
 
     /**
      * 初始化view
+     *
      * @param view
      */
     protected abstract void initView(View view);
 
     /**
      * 返回一个view
+     *
      * @return view
      */
     protected abstract View contentLayout();
 
     /**
      * 返回一个view的id
+     *
      * @return int
      */
     @LayoutRes
@@ -88,8 +94,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
 
     /**
      * 初始化p层
+     *
      * @return p
      */
+    @Override
     public abstract P initPresenter();
 
     @Override
@@ -110,8 +118,20 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
         if (mPermissionsHelper != null) {
             mPermissionsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
     }
+
+
+    /**
+     * 隐藏键盘
+     */
+    protected void hideInput() {
+        InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(INPUT_METHOD_SERVICE);
+        View v = mActivity.getWindow().peekDecorView();
+        if (null != v) {
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+
 
     @Override
     public void showContent() {

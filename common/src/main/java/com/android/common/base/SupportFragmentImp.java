@@ -78,7 +78,10 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     public void popTo(Class<?> clazz) {
         popTo(clazz, false);
     }
-
+    /**
+     * 如果等于true。则为包含此
+     * 如果为false，则不包含此
+     */
     public void popTo(Class<?> clazz, boolean includeTargetFragment) {
         mFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
     }

@@ -26,12 +26,13 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.dependencies["constraintlayout"]
     implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxVersion"
+    implementation rootProject.ext.dependencies["constraintlayout"]
     implementation project(':http')
     implementation project(':common')
     implementation project(':data')
     implementation project(':mvp')
+    implementation project(':install')
 }

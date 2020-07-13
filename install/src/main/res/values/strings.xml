@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="download_now">立即下载</string>
+    <string name="install_now">立即安装</string>
+    <string name="download_detail">1.增加测试\n2. 增加逻辑</string>
+    <string name="download_version">1.0.12342356</string>
+    <string name="tooltip_download">下载中，请稍后</string>
+    <string name="tooltip_complete">下载完成，立即安装</string>
+</resources>
