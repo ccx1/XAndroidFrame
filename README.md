@@ -12,6 +12,8 @@
 
 4. mvp  mvp设计模式框架包，如果需要mvp设计模式，需要集成，依托于common。
 
+4. install 包， 处理apk版本更新，校验。依托于common，http包。
+
 
 ### 下一计划
 
@@ -279,7 +281,20 @@ FileHelper
     // 文件拷贝流
     public boolean copy(InputStream is, File file)
 
+#### install包
 
+
+使用方式
+
+
+```
+
+    UpdateApkDialog updateApkDialog = new UpdateApkDialog(this);
+    updateApkDialog.popDialog();
+    updateApkDialog.setDownloadApkPathUrl("res/test.apk");
+    updateApkDialog.setDownloadApkSavePath(Environment.getExternalStorageDirectory() + File.separator + "test.apk");
+
+```
 
 ### 参考
 
