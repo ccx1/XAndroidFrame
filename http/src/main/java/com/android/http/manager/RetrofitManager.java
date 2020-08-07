@@ -16,8 +16,7 @@ public class RetrofitManager {
     private static RetrofitManager sRetrofitManager;
     private String mBaseUrl;
     private Retrofit retrofit;
-    private OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
-            .build();
+    private OkHttpClient mOkHttpClient = new OkHttpClient();
 
     private RetrofitManager() {
     }
@@ -56,6 +55,15 @@ public class RetrofitManager {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
+    }
+
+    public RetrofitManager changeBaseUrl(String baseUrl) {
+        if (baseUrl.equals(mBaseUrl)) {
+            return this;
+        }
+        mBaseUrl = baseUrl;
+        retrofit = retrofit.newBuilder().baseUrl(baseUrl).build();
+        return this;
     }
 
     public Retrofit getRetrofit() {

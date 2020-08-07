@@ -1,1 +1,1 @@
-include ':app', ':http', ':data', ':mvp', 'common', ':install'
+include ':app', ':http', ':data', ':mvp', ':base', ':picker', 'common', ':install'

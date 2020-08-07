@@ -35,4 +35,6 @@ dependencies {
     implementation project(':data')
     implementation project(':mvp')
     implementation project(':install')
+    implementation project(':base')
+    implementation project(':picker')
 }

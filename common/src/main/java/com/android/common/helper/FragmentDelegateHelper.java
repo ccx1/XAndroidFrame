@@ -39,6 +39,13 @@ public class FragmentDelegateHelper {
         mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, closeCurrent);
     }
 
+    public void startChildToFragment(SupportFragmentImp fragment, boolean closeCurrent) {
+        Fragment parentFragment = mFragment.getParentFragment();
+        if (parentFragment != null) {
+            mTransactionDelegate.dispatchStartTransaction(parentFragment.getFragmentManager(), fragment, closeCurrent);
+        }
+    }
+
     /**
      * 跳转
      *
@@ -50,6 +57,13 @@ public class FragmentDelegateHelper {
 
     private FragmentManager getFragmentManager() {
         return mFragment.getFragmentManager();
+    }
+
+    /**
+     * 回去
+     */
+    public void popSelf() {
+        mTransactionDelegate.pop(getFragmentManager(), (SupportFragment) mFragment);
     }
 
     /**

@@ -68,6 +68,12 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     }
 
     @Override
+    public void onPause() {
+        System.out.println("onPause " + getClass().getName());
+        super.onPause();
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
     }
 
@@ -75,13 +81,14 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
         mFragmentDelegateHelper.pop();
     }
 
+    public void popSelf() {
+        mFragmentDelegateHelper.popSelf();
+    }
+
     public void popTo(Class<?> clazz) {
         popTo(clazz, false);
     }
-    /**
-     * 如果等于true。则为包含此
-     * 如果为false，则不包含此
-     */
+
     public void popTo(Class<?> clazz, boolean includeTargetFragment) {
         mFragmentDelegateHelper.popTo(clazz, includeTargetFragment);
     }
@@ -90,8 +97,16 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
         mFragmentDelegateHelper.start(fragment);
     }
 
-    public void start(SupportFragmentImp fragment,boolean closeCurrent) {
-        mFragmentDelegateHelper.start(fragment,closeCurrent);
+    public void start(SupportFragmentImp fragment, boolean closeCurrent) {
+        mFragmentDelegateHelper.start(fragment, closeCurrent);
+    }
+
+    public void startChildToFragment(SupportFragmentImp fragment, boolean closeCurrent) {
+        mFragmentDelegateHelper.startChildToFragment(fragment, closeCurrent);
+    }
+
+    public void startChildToFragment(SupportFragmentImp fragment) {
+        mFragmentDelegateHelper.startChildToFragment(fragment, false);
     }
 
     @Override

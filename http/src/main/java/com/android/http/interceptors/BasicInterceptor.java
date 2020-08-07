@@ -21,8 +21,8 @@ public class BasicInterceptor implements Interceptor {
         builder.addHeader("User-Agent", "android")
                 .addHeader("Content-Type", "application/json; charset=utf-8")
                 .addHeader("Connection", "Keep-Alive");
-        Request request = builder.build();
-        Response response = chain.proceed(request);
+        Response response = chain.proceed(builder.build());
+
 
         if (response.code() >= 200 && response.code() < 400) {
             return response;

@@ -7,13 +7,13 @@ public interface FileDownLoadCallback<T> {
 
     /**
      * 准备工作
-     * @param length total总长度
+     * @param length
      */
     void onPrepare(long length);
 
     /**
      * 进度开始
-     * @param progress 进度
+     * @param progress
      */
     void onProgress(int progress);
 

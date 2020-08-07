@@ -87,14 +87,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         mStatusLayout.setContentView(view);
     }
 
-    /**
-     * 初始化P层
-     *
-     * @return
-     */
-    @Override
-    public abstract P initPresenter();
-
     @Override
     public void showContent() {
         mStatusLayout.showContent();

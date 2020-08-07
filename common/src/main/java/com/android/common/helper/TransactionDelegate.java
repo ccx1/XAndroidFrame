@@ -102,13 +102,23 @@ public class TransactionDelegate {
 
     @SuppressLint("CheckResult")
     public void pop(final androidx.fragment.app.FragmentManager fragmentManager) {
+        pop(fragmentManager, null);
+    }
+
+    @SuppressLint("CheckResult")
+    public void pop(final androidx.fragment.app.FragmentManager fragmentManager, final SupportFragment fragment) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
-                SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
                 try {
-                    fragmentManager.beginTransaction().remove((Fragment) topFragment).commit();
-                    FragmentManager.getInstance().PopOneFragment(topFragment);
+                    if (fragment != null) {
+                        fragmentManager.beginTransaction().remove((Fragment) fragment).commit();
+                        FragmentManager.getInstance().PopOneFragment(fragment);
+                    } else {
+                        SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
+                        fragmentManager.beginTransaction().remove((Fragment) topFragment).commit();
+                        FragmentManager.getInstance().PopOneFragment(topFragment);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
