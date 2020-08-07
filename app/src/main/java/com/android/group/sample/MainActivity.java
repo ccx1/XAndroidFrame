@@ -5,9 +5,9 @@ import android.os.Build;
 import android.view.View;
 
 import com.android.common.common.Common;
+import com.android.component.FileSelectPicker;
 import com.android.group.sample.ui.fragment.Test1Fragment;
 import com.android.mvp.view.BaseActivity;
-import com.android.picker.FileSelectPicker;
 
 /**
  * @author chicunxiang

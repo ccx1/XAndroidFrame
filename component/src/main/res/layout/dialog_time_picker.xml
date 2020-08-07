@@ -46,7 +46,7 @@
             android:orientation="horizontal">
 
 
-            <com.android.picker.loopview.LoopView
+            <com.android.component.loopview.LoopView
                 android:id="@+id/month_loop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                 app:ccx_textSize="12" />
 
 
-            <com.android.picker.loopview.LoopView
+            <com.android.component.loopview.LoopView
                 android:id="@+id/day_loop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -64,7 +64,7 @@
                 app:ccx_textSize="12" />
 
 
-            <com.android.picker.loopview.LoopView
+            <com.android.component.loopview.LoopView
                 android:id="@+id/hours_loop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -72,7 +72,7 @@
                 app:ccx_isLoop="false"
                 app:ccx_textSize="12" />
 
-            <com.android.picker.loopview.LoopView
+            <com.android.component.loopview.LoopView
                 android:id="@+id/min_loop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

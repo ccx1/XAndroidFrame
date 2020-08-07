@@ -1,4 +1,4 @@
-package com.android.picker.loopview;
+package com.android.component.loopview;
 
 public class LoopBean {
 

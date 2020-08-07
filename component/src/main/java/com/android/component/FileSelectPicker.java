@@ -1,4 +1,4 @@
-package com.android.picker;
+package com.android.component;
 
 import android.content.Context;
 import android.view.Gravity;

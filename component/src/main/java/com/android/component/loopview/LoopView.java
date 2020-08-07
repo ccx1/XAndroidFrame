@@ -1,4 +1,4 @@
-package com.android.picker.loopview;
+package com.android.component.loopview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.android.picker.R;
+import com.android.component.R;
 
 import java.util.List;
 import java.util.concurrent.Executors;

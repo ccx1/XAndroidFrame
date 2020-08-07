@@ -1,4 +1,4 @@
-package com.android.picker.loopview;
+package com.android.component.loopview;
 
 import android.os.Handler;
 import android.os.Message;
