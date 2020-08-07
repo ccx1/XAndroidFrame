@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="loop_view">
+        <attr name="ccx_textSize" format="integer" />
+        <attr name="ccx_lineSpace" format="float" />
+        <attr name="ccx_centerTextColor" format="integer" />
+        <attr name="ccx_outerTextColor" format="integer" />
+        <attr name="ccx_dividerTextColor" format="integer" />
+        <attr name="ccx_itemsVisibleCount" format="integer" />
+        <attr name="ccx_isLoop" format="boolean" />
+        <attr name="ccx_initialPosition" format="integer" />
+        <attr name="ccx_scaleX" format="float" />
+    </declare-styleable>
+</resources>
