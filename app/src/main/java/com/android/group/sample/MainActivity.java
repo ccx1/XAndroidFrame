@@ -5,7 +5,6 @@ import android.os.Build;
 import android.view.View;
 
 import com.android.common.common.Common;
-import com.android.component.FileSelectPicker;
 import com.android.group.sample.ui.fragment.Test1Fragment;
 import com.android.mvp.view.BaseActivity;
 
@@ -26,8 +25,8 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 //        TimePickerDialog timePickerDialog = new TimePickerDialog(this);
 //        timePickerDialog.show();
 
-        FileSelectPicker fileSelectPicker = new FileSelectPicker(this);
-        fileSelectPicker.show();
+//        FileSelectPicker fileSelectPicker = new FileSelectPicker(this);
+//        fileSelectPicker.show();
     }
 
 
