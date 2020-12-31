@@ -31,5 +31,6 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["recyclerview"]
     implementation project(':base')
 }
