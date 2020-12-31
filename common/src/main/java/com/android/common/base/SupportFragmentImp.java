@@ -101,14 +101,6 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
         mFragmentDelegateHelper.start(fragment, closeCurrent);
     }
 
-    public void startChildToFragment(SupportFragmentImp fragment, boolean closeCurrent) {
-        mFragmentDelegateHelper.startChildToFragment(fragment, closeCurrent);
-    }
-
-    public void startChildToFragment(SupportFragmentImp fragment) {
-        mFragmentDelegateHelper.startChildToFragment(fragment, false);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

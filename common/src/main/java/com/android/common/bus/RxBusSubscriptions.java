@@ -39,6 +39,25 @@ public class RxBusSubscriptions {
         });
     }
 
+    public static void unbind(final Object o, final Disposable disposable) {
+        final List<Disposable> disposables = mTask.get(o);
+        if (disposables == null) {
+            return;
+        }
+        Schedulers.io().createWorker().schedule(new Runnable() {
+            @Override
+            public void run() {
+                if (!disposables.isEmpty()) {
+                    if (disposable != null && !disposable.isDisposed()) {
+                        disposable.dispose();
+                    }
+                    disposables.remove(disposable);
+                }
+            }
+        });
+    }
+
+
     public static void bindAll(Object o, Disposable... disposable) {
         bindAll(o, new ArrayList<Disposable>(Arrays.asList(disposable)));
     }

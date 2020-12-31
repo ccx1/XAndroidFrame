@@ -39,24 +39,17 @@ public class FragmentDelegateHelper {
         mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, closeCurrent);
     }
 
-    public void startChildToFragment(SupportFragmentImp fragment, boolean closeCurrent) {
-        Fragment parentFragment = mFragment.getParentFragment();
-        if (parentFragment != null) {
-            mTransactionDelegate.dispatchStartTransaction(parentFragment.getFragmentManager(), fragment, closeCurrent);
-        }
-    }
-
     /**
      * 跳转
      *
      * @param fragment
      */
     public void start(SupportFragmentImp fragment) {
-        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, false);
+        start(fragment, false);
     }
 
     private FragmentManager getFragmentManager() {
-        return mFragment.getFragmentManager();
+        return mFragment.getParentFragment() != null ? mFragment.getParentFragment().getFragmentManager() : mFragment.getFragmentManager();
     }
 
     /**

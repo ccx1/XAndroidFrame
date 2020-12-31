@@ -25,7 +25,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  * @author ccx
  * @date 2018/11/21
  */
-public abstract class BaseFragment<P extends BasePresenter> extends SupportFragmentImp implements BaseView<P> {
+public abstract class BaseFragment<P extends BasePresenter> extends SupportFragmentImp implements BaseView {
 
     public  P                 mPresenter;
     private StatusLayout      mStatusLayout;
@@ -91,6 +91,11 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
     @LayoutRes
     protected abstract int contentLayoutId();
 
+    /**
+     * 初始化p层
+     * @return p
+     */
+    public abstract P initPresenter();
 
     @Override
     public void requestPermission(String[] permissions, AbstractAction1<Boolean> action1) {
@@ -103,6 +108,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends SupportFragm
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action1);
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

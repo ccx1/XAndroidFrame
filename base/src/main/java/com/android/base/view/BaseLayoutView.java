@@ -14,7 +14,7 @@ import com.android.mvp.view.BaseView;
  * Author：cunxiangchi@gamil.com
  * Time: 2020/6/17
  */
-public abstract class BaseLayoutView<T extends BasePresenter> extends FrameLayout implements BaseView<T> {
+public abstract class BaseLayoutView<T extends BasePresenter> extends FrameLayout implements BaseView {
     protected final T mPresenter;
 
     @SuppressWarnings("unchecked")
@@ -45,6 +45,13 @@ public abstract class BaseLayoutView<T extends BasePresenter> extends FrameLayou
     public void showEmpty() {
 
     }
+
+    /**
+     * 初始化p层
+     * @return p
+     */
+    public abstract T initPresenter();
+
 
     @Override
     protected void onDetachedFromWindow() {

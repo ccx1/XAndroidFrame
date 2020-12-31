@@ -14,8 +14,8 @@ import okhttp3.ResponseBody;
  */
 public class DownloadHttpHelper {
 
-    public static void downloadFile(String path, String apkSavePath, FileDownLoadCallback<ResponseBody> callback){
-        Observable<ResponseBody> observable = RetrofitManager.getInstance().getRetrofit().create(DownloadService.class).downloadFile(path);
+    public static void downloadFile(String baseURL,String path, String apkSavePath, FileDownLoadCallback<ResponseBody> callback){
+        Observable<ResponseBody> observable = RetrofitManager.getInstance().getRetrofit().create(DownloadService.class).downloadFile(baseURL,path);
         HttpServiceManager.getInstance().downloadFile(apkSavePath,observable,callback);
     }
 }

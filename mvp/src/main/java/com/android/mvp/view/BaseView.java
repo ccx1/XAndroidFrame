@@ -6,7 +6,7 @@ import com.android.common.action.AbstractAction1;
  * @author ccx
  * @date 2018/11/21
  */
-public interface BaseView<P> {
+public interface BaseView {
     /**
      * 显示内容视图
      */
@@ -33,11 +33,4 @@ public interface BaseView<P> {
      * @param action1
      */
     void requestPermission(String[] permissions, AbstractAction1<Boolean> action1);
-
-    /**
-     * 初始化P层
-     *
-     * @return
-     */
-    P initPresenter();
 }

@@ -2,6 +2,7 @@ package com.android.http.manager;
 
 import com.android.http.callback.FileDownLoadCallback;
 import com.android.http.callback.ResponseCallback;
+import com.android.http.callback.UploadResponseCallback;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -60,9 +61,37 @@ public class HttpServiceManager {
 
     }
 
+    public <T> void enqueue(Observable<T> observable, final UploadResponseCallback<T> callBack) {
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<T>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        callBack.onStartUpload();
+                    }
+
+                    @Override
+                    public void onNext(T value) {
+                        callBack.onResponse(value);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callBack.onFailure(e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
 
     public void downloadFile(final String filePath, Observable<ResponseBody> observable, final FileDownLoadCallback<ResponseBody> callBack) {
         observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {

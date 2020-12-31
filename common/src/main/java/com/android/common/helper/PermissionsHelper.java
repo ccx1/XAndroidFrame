@@ -112,7 +112,7 @@ public class PermissionsHelper {
         // 转发应该去需要请求
         for (String permission : permissions) {
             // 需要判断是否需要去请求权限
-            if (mActivity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(mActivity,permission) == PackageManager.PERMISSION_GRANTED) {
                 list.add(Observable.just(new Permission(permission, true)));
                 continue;
             } else if (mActivity.getPackageManager().isPermissionRevokedByPolicy(permission, mActivity.getPackageName())) {

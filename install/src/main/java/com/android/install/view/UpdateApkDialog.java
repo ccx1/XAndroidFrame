@@ -41,6 +41,7 @@ public class UpdateApkDialog extends Dialog {
     private String savePath;
     private final PermissionsHelper mPermissionsHelper;
     private boolean isDownload = false;
+    private String baseURL;
 
     public UpdateApkDialog(@NonNull Context context) {
         super(context, R.style.UpDateDialog);
@@ -97,6 +98,16 @@ public class UpdateApkDialog extends Dialog {
     }
 
     /**
+     * 传除了baseUrl的后半段
+     *
+     * @param baseURL
+     */
+    public void setDownloadApkPathBaseURL(String baseURL) {
+        this.baseURL = baseURL;
+    }
+
+
+    /**
      * 传apk下载的地方path
      *
      * @param path
@@ -113,6 +124,7 @@ public class UpdateApkDialog extends Dialog {
     public void setCode(String code) {
         mViewHolder.mCode.setText(code);
     }
+
 
     /**
      * 描述信息
@@ -158,7 +170,7 @@ public class UpdateApkDialog extends Dialog {
 
     @SuppressLint("SetTextI18n")
     private void startDownloadApk() {
-        DownloadHttpHelper.downloadFile(path, savePath, new FileDownLoadCallback<ResponseBody>() {
+        DownloadHttpHelper.downloadFile(baseURL, path, savePath, new FileDownLoadCallback<ResponseBody>() {
             @Override
             public void onPrepare(long length) {
                 mViewHolder.mProgress.setMax((int) length);

@@ -1,8 +1,11 @@
 package com.android.install.net;
 
+import com.android.http.interceptors.ChangeBaseUrlInterceptor;
+
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Streaming;
 
@@ -15,5 +18,7 @@ public interface DownloadService {
 
     @Streaming
     @GET("{path}")
-    Observable<ResponseBody> downloadFile(@Path(value = "path",encoded = true) String downloadPath);
+    Observable<ResponseBody> downloadFile(
+            @Header(ChangeBaseUrlInterceptor.DOMAIN) String baseUrl,
+            @Path(value = "path",encoded = true) String downloadPath);
 }

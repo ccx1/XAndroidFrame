@@ -7,6 +7,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.request.RequestFutureTarget;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
@@ -49,6 +51,8 @@ public class GlideManager {
 
             RequestOptions options = new RequestOptions()
                     .error(loadingDrawable)
+//                    .centerCrop()
+                    .dontAnimate()
                     .placeholder(loadingDrawable);
 
             Glide.with(context).load(url).apply(options).into(imageView);
@@ -79,8 +83,25 @@ public class GlideManager {
     public static void showGifImage(Context context, ImageView imageView, String url, int width, int height) {
         if (context != null && imageView != null && !TextUtils.isEmpty(url)) {
             RequestOptions options = new RequestOptions()
-                    .override(width, height).centerCrop();
-            Glide.with(context).asGif().load(url).apply(options).into(imageView);
+                    .override(width, height);
+            Glide.with(context).load(url).apply(options)
+                    .listener(new RequestFutureTarget<Drawable>(width, height))
+                    .into(imageView);
+        }
+    }
+
+
+    /**
+     * 展示图片: 转换图片以适应布局大小并减少内存占用
+     */
+    public static void showGifImage(Context context, ImageView imageView, String url, int width, int height, int loadingDrawableId) {
+        if (context != null && imageView != null && !TextUtils.isEmpty(url)) {
+            RequestOptions options = new RequestOptions()
+                    .override(width, height);
+            Glide.with(context).load(url).apply(options)
+                    .listener(new RequestFutureTarget<Drawable>(width, height))
+                    .error(loadingDrawableId)
+                    .into(imageView);
         }
     }
 
@@ -98,9 +119,9 @@ public class GlideManager {
     /**
      * 展示图片: 圆形图片
      */
-    public static void showCropImage(Context context, ImageView imageView, String url) {
+    public static void showCropImage(Context context, ImageView imageView, String url, int drawable) {
         if (context != null && imageView != null && !TextUtils.isEmpty(url)) {
-            RequestOptions options = RequestOptions.circleCropTransform();
+            RequestOptions options = RequestOptions.circleCropTransform().error(drawable).placeholder(drawable);
             Glide.with(context).load(url).apply(options).into(imageView);
         }
     }
@@ -133,11 +154,13 @@ public class GlideManager {
     /**
      * 展示图片--圆形带边图片 -> string url
      */
-    public static void showCropBorderImage(Context context, ImageView imageView, String url) {
-        if (context != null && imageView != null && !TextUtils.isEmpty(url)) {
+    public static void showCropBorderImage(Context context, ImageView imageView, String url, int drawable) {
+        if (context != null && imageView != null) {
+            RequestOptions options = new RequestOptions().error(drawable).placeholder(drawable);
             Glide.with(context)
                     .load(url)
                     .circleCrop()
+                    .apply(options)
                     .transform(new GlideCircleTransformWithBorder(context, 1, Color.WHITE))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView);

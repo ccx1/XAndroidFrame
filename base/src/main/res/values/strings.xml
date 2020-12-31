@@ -2,4 +2,5 @@
 
     <string name="not_net_work_error">网络似乎开小差了，请检查后重试～</string>
     <string name="isEmpty">没有数据～</string>
+    <string name="reload">重新加载</string>
 </resources>

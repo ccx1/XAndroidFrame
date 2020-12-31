@@ -19,7 +19,6 @@ public abstract class BaseRecyclerViewListAdapter<T extends RecyclerView.ViewHol
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull T holder, int i) {
         onBindViewHolder(holder, mData.get(i), i);
@@ -71,5 +70,10 @@ public abstract class BaseRecyclerViewListAdapter<T extends RecyclerView.ViewHol
         }
     }
 
+
+    public void clearData() {
+        mData.clear();
+        notifyDataSetChanged();
+    }
 
 }

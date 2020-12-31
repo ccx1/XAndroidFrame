@@ -14,10 +14,15 @@ project.ext {
 
 
     dependencies = [
-            "butterknife"         : "com.jakewharton:butterknife:${butterknifeVersion}",
-            "butterknife-compiler": "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
-            "recyclerview"        : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
-            "gson"                : "com.google.code.gson:gson:2.8.6",
-            "constraintlayout"    : "androidx.constraintlayout:constraintlayout:1.1.3"
+            "butterknife"          : "com.jakewharton:butterknife:${butterknifeVersion}",
+            "butterknife-compiler" : "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
+            "recyclerview"         : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
+            "appcompat"            : "androidx.appcompat:appcompat:${appcompatVersion}",
+            "gson"                 : "com.google.code.gson:gson:2.8.6",
+            "constraintlayout"     : "androidx.constraintlayout:constraintlayout:1.1.3",
+            "rxandroid"            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            "rxjava"               : "io.reactivex.rxjava2:rxjava:${rxVersion}",
+            // 头条适配方案
+            "autosize"             : "me.jessyan:autosize:1.2.1"
     ]
 }

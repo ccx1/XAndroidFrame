@@ -42,6 +42,7 @@ public class RetrofitManager {
         build();
     }
 
+
     public void build() {
         if (mBaseUrl == null) {
             throw new RuntimeException("need setBaseUrl");

@@ -1,6 +1,7 @@
 package com.android.http.manager;
 
 import com.android.http.interceptors.BasicInterceptor;
+import com.android.http.interceptors.ChangeBaseUrlInterceptor;
 import com.android.http.interceptors.LoggerInterceptor;
 
 import java.util.concurrent.TimeUnit;
@@ -31,6 +32,7 @@ public class OkHttpManager {
     public OkHttpClient build() {
         if (mOkHttpClient == null) {
             mOkHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new ChangeBaseUrlInterceptor())
                     .addInterceptor(new LoggerInterceptor())
                     .addInterceptor(new BasicInterceptor())
                     .connectTimeout(mTimeOut, TimeUnit.SECONDS)
@@ -42,6 +44,11 @@ public class OkHttpManager {
     }
 
     public void addInterceptor(Interceptor interceptor) {
+        for (Interceptor interceptorItem : build().interceptors()) {
+            if (interceptorItem.getClass() == interceptor.getClass()) {
+                return;
+            }
+        }
         mOkHttpClient = build().newBuilder().addInterceptor(interceptor).build();
     }
 }

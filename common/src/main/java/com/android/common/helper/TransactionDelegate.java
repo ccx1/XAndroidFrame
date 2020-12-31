@@ -217,9 +217,11 @@ public class TransactionDelegate {
                     public void onError(Throwable e) {
                         // 无论如何都要消失
                         View mock = container.findViewWithTag("mock");
-                        ((ViewGroup) mock).removeAllViews();
-                        mock.setVisibility(View.GONE);
-                        ((ViewGroup) container).removeView(mock);
+                        if (mock != null) {
+                            ((ViewGroup) mock).removeAllViews();
+                            mock.setVisibility(View.GONE);
+                            ((ViewGroup) container).removeView(mock);
+                        }
                     }
 
                     @Override
@@ -291,6 +293,5 @@ public class TransactionDelegate {
         }
         support.onSupportBackPressed();
     }
-
 
 }

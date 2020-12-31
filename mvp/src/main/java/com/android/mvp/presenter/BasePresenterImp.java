@@ -7,6 +7,7 @@ import com.android.common.bus.RxBusSubscriptions;
 import com.android.common.utils.ToastUtil;
 import com.android.mvp.view.BaseView;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Predicate;
@@ -18,7 +19,7 @@ import io.reactivex.functions.Predicate;
 public abstract class BasePresenterImp<V extends BaseView> implements BasePresenter<V> {
 
     protected Context mContext;
-    protected V       mView;
+    protected V mView;
 
     @Override
     public void attachView(V view, Context context) {
@@ -40,7 +41,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
     }
 
     @Override
-    public <T> void createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
+    public <T> Disposable createBusInstance(final Class<T> clazz, Consumer<? super T> action) {
         Disposable subscribe = RxBus.get()
                 .subscribe(clazz)
                 .filter(new Predicate<T>() {
@@ -50,6 +51,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
                     }
                 })
                 .cast(clazz)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
@@ -58,6 +60,7 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
                     }
                 });
         RxBusSubscriptions.bind(mView, subscribe);
+        return subscribe;
     }
 
     @Override
@@ -78,5 +81,9 @@ public abstract class BasePresenterImp<V extends BaseView> implements BasePresen
     @Override
     public void onDestroy() {
         RxBusSubscriptions.unbind(mView);
+    }
+
+    public void unBindEvent(Disposable disposable) {
+        RxBusSubscriptions.unbind(mView, disposable);
     }
 }

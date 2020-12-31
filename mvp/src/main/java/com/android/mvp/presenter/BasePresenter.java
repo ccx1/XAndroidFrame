@@ -6,6 +6,7 @@ import androidx.annotation.StringRes;
 
 import com.android.mvp.view.BaseView;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -47,12 +48,12 @@ public interface BasePresenter<V extends BaseView> {
     /**
      * 创建Bus
      *
+     * @param <T>
      * @param clazz
      * @param action
-     * @param <T>
      * @return
      */
-    <T> void createBusInstance(Class<T> clazz, Consumer<? super T> action);
+    <T> Disposable createBusInstance(Class<T> clazz, Consumer<? super T> action);
 
     /**
      * 执行回收操作

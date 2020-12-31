@@ -22,9 +22,12 @@ public abstract class BaseToolbarFragment<T extends BasePresenter> extends BaseF
     protected ImageView mRightImg;
     protected TextView mRightTextView;
     protected TextView mLeftTextView;
-    private TextView mEmptyTextView;
-    private View mEmptyView;
+    protected TextView mErrorTextView;
+    private View mErrorView;
     private ViewGroup mHolderLayout;
+    protected View mProgress;
+    private View mEmptyView;
+    protected TextView mErrorTextTooltipView;
 
 
     @Override
@@ -40,36 +43,88 @@ public abstract class BaseToolbarFragment<T extends BasePresenter> extends BaseF
         View mLeftGroup = viewGroup.findViewById(R.id.left_group);
         mRightImg = viewGroup.findViewById(R.id.iv_toolbar_right);
         mRightTextView = viewGroup.findViewById(R.id.tv_toolbar_right);
+        mProgress = viewGroup.findViewById(R.id.progress);
         mLeftTextView = viewGroup.findViewById(R.id.tv_left);
+        mErrorView = viewGroup.findViewById(R.id.error_view);
         mEmptyView = viewGroup.findViewById(R.id.empty_view);
-        mEmptyTextView = viewGroup.findViewById(R.id.empty_text);
+        mErrorTextView = viewGroup.findViewById(R.id.error_text);
+        mErrorTextTooltipView = viewGroup.findViewById(R.id.error_tooltip);
         if (layoutContent != 0) {
             View view = inflater.inflate(layoutContent, null, false);
             mHolderLayout.addView(view);
         }
         mLeftImg.setOnClickListener((v) -> leftClick());
         mLeftGroup.setOnClickListener((v) -> leftClick());
+        mErrorTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!customRetry()) {
+                    retry();
+                }
+            }
+        });
         return viewGroup;
     }
 
-
-    protected void showEmptyView() {
-        mEmptyView.setVisibility(View.VISIBLE);
-        mHolderLayout.setVisibility(View.GONE);
+    public boolean customRetry() {
+        return false;
     }
 
-    protected void showContentView() {
+    public void retry() {
+        if (mPresenter != null) {
+            mPresenter.retry();
+        }
+    }
+
+
+    public void showErrorView() {
+        mErrorView.setVisibility(View.VISIBLE);
+        mProgress.setVisibility(View.GONE);
+        mHolderLayout.setVisibility(View.GONE);
         mEmptyView.setVisibility(View.GONE);
+    }
+
+
+    public void showCustomErrorView(String tooltip) {
+        mErrorTextTooltipView.setText(tooltip);
+        mErrorView.setVisibility(View.VISIBLE);
+        mProgress.setVisibility(View.GONE);
+        mHolderLayout.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
+    }
+
+
+
+
+    public void showProgress() {
+        mErrorView.setVisibility(View.GONE);
+        mProgress.setVisibility(View.VISIBLE);
+        mHolderLayout.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.GONE);
+    }
+
+
+    public void showContentView() {
+        mErrorView.setVisibility(View.GONE);
+        mProgress.setVisibility(View.GONE);
         mHolderLayout.setVisibility(View.VISIBLE);
+        mEmptyView.setVisibility(View.GONE);
+    }
+
+    public void showEmptyView() {
+        mErrorView.setVisibility(View.GONE);
+        mProgress.setVisibility(View.GONE);
+        mHolderLayout.setVisibility(View.GONE);
+        mEmptyView.setVisibility(View.VISIBLE);
     }
 
 
     protected void setEmptyTextContent(String text) {
-        mEmptyTextView.setText(text);
+        mErrorTextView.setText(text);
     }
 
     protected void setEmptyTextContent(@StringRes int id) {
-        mEmptyTextView.setText(id);
+        mErrorTextView.setText(id);
     }
 
     public void leftClick() {

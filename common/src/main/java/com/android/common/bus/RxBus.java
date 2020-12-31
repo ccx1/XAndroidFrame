@@ -1,8 +1,5 @@
 package com.android.common.bus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.Flowable;
 import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
@@ -15,7 +12,6 @@ public class RxBus {
 
     private static RxBus                     sBus;
     private final  FlowableProcessor<Object> mProcessor;
-    private static List<Object>              subscribeTask = new ArrayList<>();
 
     private RxBus() {
         mProcessor = PublishProcessor.create().toSerialized();

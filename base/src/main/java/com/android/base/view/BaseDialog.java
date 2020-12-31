@@ -52,9 +52,8 @@ public abstract class BaseDialog {
         return false;
     }
 
-    public BaseDialog setCancelable(boolean cancel) {
+    public void setCancelable(boolean cancel) {
         this.mDialog.setCancelable(cancel);
-        return this;
     }
 
     public void show() {
@@ -69,7 +68,7 @@ public abstract class BaseDialog {
         return this.mDialog.isShowing();
     }
 
-    public BaseDialog setdismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public BaseDialog setDismissListener(DialogInterface.OnDismissListener dismissListener) {
         this.mDialog.setOnDismissListener(dismissListener);
         return this;
     }
