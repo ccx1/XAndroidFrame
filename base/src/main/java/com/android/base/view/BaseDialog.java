@@ -40,12 +40,10 @@ public abstract class BaseDialog {
         Window window = this.mDialog.getWindow();
         if (window != null)
             window.setSoftInputMode(3);
-
         if (needZoomWidth()) {
             WindowManager.LayoutParams attributes = this.mDialog.getWindow().getAttributes();
             attributes.width = display.getWidth();
         }
-
     }
 
     protected boolean needZoomWidth() {

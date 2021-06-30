@@ -51,7 +51,7 @@ public abstract class BaseRawManager extends SQLiteOpenHelper {
      * | _id | value | create_time | last_update |
      */
     protected static class ValueColumn
-            extends BaseRawManager.Column {
+            extends Column {
         static final String COLUMN_VALUE = "value";
 
         public static String createTableSQL(String tableName) {
@@ -71,7 +71,7 @@ public abstract class BaseRawManager extends SQLiteOpenHelper {
      * | _id | name | value | create_time | last_update |
      */
     protected static class NameValueColumn
-            extends BaseRawManager.ValueColumn {
+            extends ValueColumn {
         private static final String COLUMN_NAME = "name";
 
         public static String createTableSQL(String tableName) {

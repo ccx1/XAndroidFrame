@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.android.common.common.Logger;
 import com.android.common.helper.FragmentDelegateHelper;
 
 /**
@@ -63,13 +64,13 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
 
     @Override
     public void onResume() {
-        System.out.println("onResume " + getClass().getName());
+        Logger.d("onResume " + getClass().getName());
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        System.out.println("onPause " + getClass().getName());
+        Logger.d("onPause " + getClass().getName());
         super.onPause();
     }
 
@@ -98,7 +99,11 @@ public class SupportFragmentImp extends Fragment implements SupportFragment {
     }
 
     public void start(SupportFragmentImp fragment, boolean closeCurrent) {
-        mFragmentDelegateHelper.start(fragment, closeCurrent);
+        mFragmentDelegateHelper.start(fragment, closeCurrent, false);
+    }
+
+    public void start(SupportFragmentImp fragment, boolean closeCurrent, boolean forceOpen) {
+        mFragmentDelegateHelper.start(fragment, closeCurrent, forceOpen);
     }
 
     @Override

@@ -3,11 +3,13 @@ package com.android.data.helper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import com.android.data.model.Photo;
 
@@ -26,6 +28,7 @@ public class CameraHelper {
 
     public static final int SYSTEM_CAMERA_RESULT = 10101;
     public static final int SYSTEM_PHOTO_RESULT = 10102;
+    public static final int SYSTEM_PHOTO_CROP_RESULT = 10105;
 
     private static CameraHelper sCameraHelper;
 
@@ -49,6 +52,52 @@ public class CameraHelper {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         activity.startActivityForResult(intent, SYSTEM_CAMERA_RESULT);
     }
+
+    public void startSystemCamera(Fragment fragment, File file) {
+        Intent intent = new Intent();
+        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 23) {
+            uri = FileProvider.getUriForFile(fragment.getActivity(), fragment.getActivity().getPackageName() + ".fileProvider", file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        fragment.startActivityForResult(intent, SYSTEM_CAMERA_RESULT);
+    }
+
+    public void startSystemCrop(Fragment fragment, File file) {
+        if (file == null || !file.exists()) {
+            // 防止直接返回没有数据回来的问题
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 23) {
+            uri = FileProvider.getUriForFile(fragment.getActivity(), fragment.getActivity().getPackageName() + ".fileProvider", file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(uri, "image/*");
+        // 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
+        intent.putExtra("return-data", true);
+        intent.putExtra("scale", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        fragment.startActivityForResult(intent, SYSTEM_PHOTO_CROP_RESULT);
+    }
+
+
 
     public void startSystemPhotoSelect(Activity activity) {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
@@ -85,7 +134,7 @@ public class CameraHelper {
     public void onActivityResult(Activity activity, File file, int requestCode, Intent data) {
         switch (requestCode) {
             case SYSTEM_CAMERA_RESULT:
-                if (!file.exists()) {
+                if (file == null || !file.exists()) {
                     // 防止直接返回没有数据回来的问题
                     return;
                 }

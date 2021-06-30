@@ -2,9 +2,10 @@
     package="com.android.data">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE'" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
@@ -14,6 +15,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/path" />
         </provider>
+
 
     </application>
 </manifest>

@@ -52,6 +52,7 @@ public class GlideManager {
             RequestOptions options = new RequestOptions()
                     .error(loadingDrawable)
 //                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate()
                     .placeholder(loadingDrawable);
 
@@ -97,6 +98,7 @@ public class GlideManager {
     public static void showGifImage(Context context, ImageView imageView, String url, int width, int height, int loadingDrawableId) {
         if (context != null && imageView != null && !TextUtils.isEmpty(url)) {
             RequestOptions options = new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(width, height);
             Glide.with(context).load(url).apply(options)
                     .listener(new RequestFutureTarget<Drawable>(width, height))

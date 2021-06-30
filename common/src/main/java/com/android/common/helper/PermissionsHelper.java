@@ -19,6 +19,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.subjects.PublishSubject;
 
@@ -64,13 +65,14 @@ public class PermissionsHelper {
         // flatMap是请求转发，将原先的Observable.just(1),转发成Observable.just(true)
         // 通过类型转换，将其原本的int类型，转换成boolean类型
         return new ObservableTransformer<T, Boolean>() {
+            @NonNull
             @Override
-            public ObservableSource<Boolean> apply(Observable<T> upstream) {
+            public ObservableSource<Boolean> apply(@NonNull Observable<T> upstream) {
                 return request(upstream, permissions)
                         .buffer(permissions.length)
                         .flatMap(new Function<List<Permission>, ObservableSource<Boolean>>() {
                             @Override
-                            public ObservableSource<Boolean> apply(List<Permission> permissions) throws Exception {
+                            public ObservableSource<Boolean> apply(@NonNull List<Permission> permissions) throws Exception {
                                 if (permissions.isEmpty()) {
                                     return Observable.empty();
                                 }

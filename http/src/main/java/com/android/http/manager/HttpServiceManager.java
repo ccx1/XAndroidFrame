@@ -91,7 +91,6 @@ public class HttpServiceManager {
 
     public void downloadFile(final String filePath, Observable<ResponseBody> observable, final FileDownLoadCallback<ResponseBody> callBack) {
         observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -106,14 +105,14 @@ public class HttpServiceManager {
                             if (file.exists()) {
                                 file.delete();
                             }
-                            InputStream         is    = body.byteStream();
-                            FileOutputStream    fos   = new FileOutputStream(file);
-                            BufferedInputStream bis   = new BufferedInputStream(is);
-                            long                total = body.contentLength();
+                            InputStream is = body.byteStream();
+                            FileOutputStream fos = new FileOutputStream(file);
+                            BufferedInputStream bis = new BufferedInputStream(is);
+                            long total = body.contentLength();
                             callBack.onPrepare(total);
-                            byte[] buffer  = new byte[8 * 1024];
-                            int    len;
-                            int    process = 0;
+                            byte[] buffer = new byte[8 * 1024];
+                            int len;
+                            int process = 0;
                             callBack.onProgress(process);
                             while ((len = bis.read(buffer)) != -1) {
                                 process += len;

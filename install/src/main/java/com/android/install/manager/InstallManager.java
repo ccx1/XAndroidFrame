@@ -155,7 +155,7 @@ public class InstallManager {
             intent.putExtra("name", "");
 
             String packageName = context.getPackageName();
-            Uri data = FileProvider.getUriForFile(context, packageName + ".fileprovider", file);
+            Uri data = FileProvider.getUriForFile(context, packageName + ".fileProvider", file);
             intent.setDataAndType(data, "application/vnd.android.package-archive");
 
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

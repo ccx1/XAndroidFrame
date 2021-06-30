@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.android.common.action.AbstractAction1;
 import com.android.common.base.SupportActivityImp;
 import com.android.common.helper.PermissionsHelper;
+import com.android.common.manager.ActivityManager;
 import com.android.mvp.R;
 import com.android.mvp.presenter.BasePresenter;
 import com.android.mvp.widget.StatusLayout;
@@ -28,6 +29,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityManager.getInstance().pushOnActivity(this);
         mPresenter = initPresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this, this);
@@ -125,6 +127,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         if (mPresenter != null) {
             mPresenter.onDestroy();
         }
+        ActivityManager.getInstance().popOneActivity(this);
     }
 
     @Override

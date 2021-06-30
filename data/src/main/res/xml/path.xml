@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path path="." name="camera_photos" />
-</paths>
+<resources>
+    <paths>
+        <root-path name="root" path="" />
+        <external-path name="image" path="."/>
+        <external-path
+            name="external_storage_root"
+            path="." />
+        <files-path
+            name="files-path"
+            path="." />
+        <cache-path
+            name="cache-path"
+            path="." />
+        <!--/storage/emulated/0/Android/data/...-->
+        <external-files-path
+            name="external_file_path"
+            path="." />
+        <!--代表app 外部存储区域根目录下的文件 Context.getExternalCacheDir目录下的目录-->
+        <external-cache-path
+            name="external_cache_path"
+            path="." />
+
+    </paths>
+</resources>

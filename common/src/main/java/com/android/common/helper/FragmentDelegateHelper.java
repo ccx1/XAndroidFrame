@@ -35,8 +35,8 @@ public class FragmentDelegateHelper {
         this.mFragment = (Fragment) fragment;
     }
 
-    public void start(SupportFragmentImp fragment, boolean closeCurrent) {
-        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, closeCurrent);
+    public void start(SupportFragmentImp fragment, boolean closeCurrent, boolean forceOpen) {
+        mTransactionDelegate.dispatchStartTransaction(getFragmentManager(), fragment, closeCurrent,forceOpen);
     }
 
     /**
@@ -45,8 +45,10 @@ public class FragmentDelegateHelper {
      * @param fragment
      */
     public void start(SupportFragmentImp fragment) {
-        start(fragment, false);
+        start(fragment, false, false);
     }
+
+
 
     private FragmentManager getFragmentManager() {
         return mFragment.getParentFragment() != null ? mFragment.getParentFragment().getFragmentManager() : mFragment.getFragmentManager();

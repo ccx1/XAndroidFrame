@@ -70,7 +70,7 @@ public class StatusLayout extends FrameLayout {
         return view;
     }
 
-    public void setRetryOnClickListener(View.OnClickListener listener) {
+    public void setRetryOnClickListener(OnClickListener listener) {
         View errorLayout = viewTask.get(errorViewID);
         if (errorLayout == null) {
             inflate(errorViewID);

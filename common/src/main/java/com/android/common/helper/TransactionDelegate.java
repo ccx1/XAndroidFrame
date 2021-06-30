@@ -42,12 +42,22 @@ public class TransactionDelegate {
     }
 
     @SuppressLint("CheckResult")
-    public void dispatchStartTransaction(final androidx.fragment.app.FragmentManager fragmentManager, final SupportFragment fragment, final boolean closeCurrent) {
+    public void dispatchStartTransaction(final androidx.fragment.app.FragmentManager fragmentManager, final SupportFragment fragment, final boolean closeCurrent, final boolean forceOpen) {
         Schedulers.io().createWorker().schedule(new Runnable() {
             @Override
             public void run() {
                 SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
                 int anInt = getContainerId((Fragment) topFragment);
+                if (!forceOpen && topFragment.getClass() == fragment.getClass()) {
+                    try {
+                        // 尝试销毁
+                        ((Fragment) fragment).onDestroyView();
+                        System.gc();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
                 fragmentManager.beginTransaction().add(anInt, (Fragment) fragment, fragment.getClass().getName()).commit();
                 // 每一级都需要存储容器值
                 bindContainerId(anInt, fragment);
@@ -100,7 +110,6 @@ public class TransactionDelegate {
     }
 
 
-    @SuppressLint("CheckResult")
     public void pop(final androidx.fragment.app.FragmentManager fragmentManager) {
         pop(fragmentManager, null);
     }
@@ -112,11 +121,14 @@ public class TransactionDelegate {
             public void run() {
                 try {
                     if (fragment != null) {
-                        fragmentManager.beginTransaction().remove((Fragment) fragment).commit();
+                        fragmentManager.beginTransaction()
+                                .detach((Fragment) fragment)
+                                .remove((Fragment) fragment).commit();
                         FragmentManager.getInstance().PopOneFragment(fragment);
                     } else {
                         SupportFragment topFragment = FragmentManager.getInstance().getTopFragment();
-                        fragmentManager.beginTransaction().remove((Fragment) topFragment).commit();
+                        fragmentManager.beginTransaction().detach((Fragment) topFragment)
+                                .remove((Fragment) topFragment).commit();
                         FragmentManager.getInstance().PopOneFragment(topFragment);
                     }
                 } catch (Exception e) {
@@ -197,6 +209,7 @@ public class TransactionDelegate {
                     }
                 }).observeOn(AndroidSchedulers.mainThread())
                 .timeout(exitAnimation.getDuration(), TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ViewGroup>() {
                     @Override
                     public void onSubscribe(Disposable d) {

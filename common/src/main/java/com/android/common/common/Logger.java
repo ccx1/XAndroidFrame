@@ -73,7 +73,9 @@ public class Logger {
         if (BuildConfig.DEBUG) {
             Log.d(Logger.class.getName(), s);
         }
-    }   public static void d(String tag, Object o) {
+    }
+
+    public static void d(String tag, Object o) {
         if (BuildConfig.DEBUG) {
             Log.d(tag, getTargetStr(o));
         }
@@ -99,7 +101,7 @@ public class Logger {
 
     public static void e(String tag, Object o) {
         if (BuildConfig.DEBUG) {
-            Log.e(tag,getTargetStr(o));
+            Log.e(tag, getTargetStr(o));
         }
     }
 
@@ -137,20 +139,20 @@ public class Logger {
     private static String getTargetStr(Object o) {
         if (o instanceof String) {
             return (String) o;
-        }else if (o instanceof Boolean){
+        } else if (o instanceof Boolean) {
             return String.valueOf(o);
         } else if (o instanceof Float) {
             return String.valueOf(o);
         } else if (o instanceof Integer) {
             return String.valueOf(o);
-        }  else if (o instanceof Double) {
+        } else if (o instanceof Double) {
             return String.valueOf(o);
         } else if (o instanceof Long) {
             return String.valueOf(o);
-        }else{
-            if (o == null){
+        } else {
+            if (o == null) {
                 return null;
-            }else {
+            } else {
                 return o.toString();
             }
         }

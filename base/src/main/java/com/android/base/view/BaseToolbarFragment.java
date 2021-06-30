@@ -28,6 +28,11 @@ public abstract class BaseToolbarFragment<T extends BasePresenter> extends BaseF
     protected View mProgress;
     private View mEmptyView;
     protected TextView mErrorTextTooltipView;
+    protected ImageView mTitleImg;
+    private View mMessageDialog;
+    private TextView mDialogMessage;
+    private View mConfirmButton;
+    private View mCancelButton;
 
 
     @Override
@@ -39,6 +44,7 @@ public abstract class BaseToolbarFragment<T extends BasePresenter> extends BaseF
         mToolbar = viewGroup.findViewById(R.id.toolbar);
         mHolderLayout = viewGroup.findViewById(R.id.holder_layout);
         mTitle = viewGroup.findViewById(R.id.tv_toolbar_title);
+        mTitleImg = viewGroup.findViewById(R.id.iv_toolbar_title);
         mLeftImg = viewGroup.findViewById(R.id.iv_toolbar_left);
         View mLeftGroup = viewGroup.findViewById(R.id.left_group);
         mRightImg = viewGroup.findViewById(R.id.iv_toolbar_right);
@@ -49,18 +55,19 @@ public abstract class BaseToolbarFragment<T extends BasePresenter> extends BaseF
         mEmptyView = viewGroup.findViewById(R.id.empty_view);
         mErrorTextView = viewGroup.findViewById(R.id.error_text);
         mErrorTextTooltipView = viewGroup.findViewById(R.id.error_tooltip);
+        mMessageDialog = viewGroup.findViewById(R.id.messageDialog);
+        mDialogMessage = viewGroup.findViewById(R.id.message);
+        mCancelButton = viewGroup.findViewById(R.id.cancel_button);
+        mConfirmButton = viewGroup.findViewById(R.id.confirm_button);
         if (layoutContent != 0) {
             View view = inflater.inflate(layoutContent, null, false);
             mHolderLayout.addView(view);
         }
         mLeftImg.setOnClickListener((v) -> leftClick());
         mLeftGroup.setOnClickListener((v) -> leftClick());
-        mErrorTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!customRetry()) {
-                    retry();
-                }
+        mErrorTextView.setOnClickListener(v -> {
+            if (!customRetry()) {
+                retry();
             }
         });
         return viewGroup;

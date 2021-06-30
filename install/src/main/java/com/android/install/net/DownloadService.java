@@ -20,5 +20,5 @@ public interface DownloadService {
     @GET("{path}")
     Observable<ResponseBody> downloadFile(
             @Header(ChangeBaseUrlInterceptor.DOMAIN) String baseUrl,
-            @Path(value = "path",encoded = true) String downloadPath);
+            @Path(value = "path", encoded = true) String downloadPath);
 }

@@ -52,7 +52,7 @@ public class ActivityDelegateHelper {
     }
 
     private void start(FragmentManager fragmentManager, SupportFragment tofragment) {
-        mTransactionDelegate.dispatchStartTransaction(fragmentManager, tofragment, false);
+        mTransactionDelegate.dispatchStartTransaction(fragmentManager, tofragment, false, false);
     }
 
     public void pop() {

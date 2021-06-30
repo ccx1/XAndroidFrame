@@ -2,10 +2,10 @@ package com.android.common.manager;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.common.base.SupportFragment;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.android.common.base.SupportFragment;
 
 
 /**
@@ -13,7 +13,7 @@ import com.android.common.base.SupportFragment;
  */
 public class FragmentManager {
     private static List<SupportFragment> task = new ArrayList<>();
-    private static FragmentManager       sFragmentManager;
+    private static FragmentManager sFragmentManager;
 
     private FragmentManager() {
     }
@@ -27,6 +27,7 @@ public class FragmentManager {
 
     /**
      * 添加一个fragment
+     *
      * @param f
      */
     public void pushOneFragment(SupportFragment f) {
@@ -37,11 +38,15 @@ public class FragmentManager {
 
     /**
      * 移除一个fragment
+     *
      * @param f
      */
     public void PopOneFragment(SupportFragment f) {
         if (task.contains(f)) {
             task.remove(f);
+            if (mOnFragmentPopListener != null) {
+                mOnFragmentPopListener.onFragmentPop();
+            }
             f = null;
         }
     }
@@ -94,4 +99,20 @@ public class FragmentManager {
         return list;
     }
 
+    public void destroy() {
+        for (SupportFragment supportFragment : task) {
+            PopOneFragment(supportFragment);
+        }
+        task = null;
+    }
+
+    private OnFragmentPopListener mOnFragmentPopListener;
+
+    public void setOnFragmentPopListener(OnFragmentPopListener onFragmentPopListener) {
+        mOnFragmentPopListener = onFragmentPopListener;
+    }
+
+    public interface OnFragmentPopListener {
+        void onFragmentPop();
+    }
 }

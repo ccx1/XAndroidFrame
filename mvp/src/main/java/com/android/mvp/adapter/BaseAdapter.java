@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  */
 public abstract class BaseAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
-    private AdapterView.OnItemClickListener mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;

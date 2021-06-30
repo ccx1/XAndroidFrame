@@ -70,22 +70,22 @@ public class VersionManager {
         int index = 0;
         // 获取最小长度值
         int minLen = Math.min(version1Array.length, version2Array.length);
-        int diff = 0;
+        long diff = 0;
         // 循环判断每位的大小
         Logger.d(TAG, "verTag" + version1Array[index]);
         while (index < minLen
-                && (diff = Integer.parseInt(version1Array[index]) - Integer.parseInt(version2Array[index])) == 0) {
+                && (diff = Long.parseLong(version1Array[index]) - Long.parseLong(version2Array[index])) == 0) {
             index++;
         }
         if (diff == 0) {
             // 如果位数不一致，比较多余位数
             for (int i = index; i < version1Array.length; i++) {
-                if (Integer.parseInt(version1Array[i]) > 0) {
+                if (Long.parseLong(version1Array[i]) > 0) {
                     return 1;
                 }
             }
             for (int i = index; i < version2Array.length; i++) {
-                if (Integer.parseInt(version2Array[i]) > 0) {
+                if (Long.parseLong(version2Array[i]) > 0) {
                     return -1;
                 }
             }
